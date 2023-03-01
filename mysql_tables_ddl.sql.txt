@@ -1,0 +1,39 @@
+create table ineuron_course.all_course (
+course_link varchar(1000),
+topic_name varchar(1000),
+sub_topic_name varchar(1000),
+course_name varchar(1000),
+course_desc varchar(1000)
+);
+
+create table ineuron_course.all_features (
+course_link varchar(1000),
+course_feature varchar(1000)
+);
+
+create table ineuron_course.all_what_you_will_learn(
+course_link varchar(1000),
+learning_topics varchar(1000)
+);
+
+create table ineuron_course.all_requirenments(
+course_link varchar(1000),
+course_require varchar(1000)
+);
+
+create table ineuron_course.all_curriculum(
+course_link varchar(1000),
+course_curriculum varchar(1000),
+course_details varchar(1000)
+);
+
+create table ineuron_course.all_projects(
+course_link varchar(1000),
+project_name varchar(1000),
+project_details varchar(1000)
+);
+
+create table ineuron_course.all_instructors(
+course_link varchar(1000),
+instructor_name varchar(1000)
+);
