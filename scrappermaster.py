@@ -34,15 +34,26 @@ class autoScrapper:
         except Exception as e:
             raise e
 
-    def connection_check(self):
-        if self.dbOps.isCollectionPresent(dbName=self.dbName, collectionName=self.collectionName) and self.dbsql.createCursor():
+    def mongo_connection_check(self):
+        if self.dbOps.isCollectionPresent(dbName=self.dbName, collectionName=self.collectionName):
+            return True
+        else:
+            try:
+                self.dbOps.createCollection(dbName=self.dbName, collectionName=self.collectionName)
+                return True
+            except Exception as e:
+                return False
+            
+    def mongo_connection_check(self):
+        if self.dbsql.createCursor():
             return True
         else:
             return False
 
     def autoscrapping(self):
         try:
-            if self.connection_check():
+            print("program is inside autoscrapping for loop") #debug
+            if self.mongo_connection_check() and self.mongo_connection_check():
                 scrapper = scrappingOperations(chrome_options=self.chrome_options) # initialization of scrapping
                 source_link="https://ineuron.ai/courses"
                 all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=120)
@@ -52,7 +63,10 @@ class autoScrapper:
                 except Exception as e:
                     raise e
             
-                for course_link in all_course_link_list:
+                #for course_link in all_course_link_list:
+                for i in range(len(all_course_link_list),15):  #for testing a batch
+
+                    course_link = all_course_link_list[i]  # for testing 
 
                     course_code_bs=scrapper.get_course_code(course_link)
                     course_data_dict=scrapper.basic_course_data(course_code_bs)
@@ -67,35 +81,37 @@ class autoScrapper:
                         course_data_dict["project_details"] = project_data_dict
                         project_track=True
                     else:
-                        project_track=True
+                        project_track=False
 
-                    self.dbOps.insertOneData(dbName="i_nearon_scrapping",collectionName="course_data",data=project_data_dict)
+                    self.dbOps.insertOneData(dbName="i_nearon_scrapping",collectionName="course_data",data=course_data_dict)
 
-                    self.dbsql.masterInsertSql(course_link=course_link,course_data_dict=project_data_dict,project_track=project_track)
+                    self.dbsql.masterInsertSql(course_link=course_link,course_data_dict=course_data_dict,project_track=project_track)
 
                 self.pdfobj.createPdf()
 
             else:
-                pass #check connections please
+                print("check connections please")
+                
                 
         except Exception as e:
             raise e
         
     def autoscrapping_one(self):
         try:
-            if self.connection_check():
+            print("program is inside autoscrapping one")
+            if self.mongo_connection_check() and self.mongo_connection_check():
                 scrapper = scrappingOperations(chrome_options=self.chrome_options) # initialization of scrapping
                 source_link="https://ineuron.ai/courses"
-                all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=120)
+                all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=15)
 
                 try:
                     self.dbsql.createTables(schema_name="ineuron_course")
                 except Exception as e:
                     raise e
 
-                course_link=all_course_link_list[143] # manually entering which course to scrap
+                course_link=all_course_link_list[12] # manually entering which course to scrap
 
-                course_code_bs=scrapper.get_course_code()
+                course_code_bs=scrapper.get_course_code(course_link)
                 course_data_dict=scrapper.basic_course_data(course_code_bs)
                 curr_project_code=scrapper.curr_and_proj(course_code_bs)
                 curr_data_dict=scrapper.curr_data(curr_project_code)
@@ -108,10 +124,11 @@ class autoScrapper:
                     course_data_dict["project_details"] = project_data_dict
                     project_track=True
                 else:
-                    project_track=True
+                    project_track=False
 
-                self.dbOps.insertOneData(dbName="i_nearon_scrapping",collectionName="course_data",data=project_data_dict)
-                self.dbsql.masterInsertSql(course_link=course_link,course_data_dict=project_data_dict,project_track=project_track)
+                print(type(course_data_dict))
+                self.dbOps.insertOneData(dbName="i_nearon_scrapping",collectionName="course_data",data=course_data_dict)
+                self.dbsql.masterInsertSql(course_link=course_link,course_data_dict=course_data_dict,project_track=project_track)
                 self.pdfobj.createPdf()
                 print("all completed")
             else:
@@ -123,7 +140,7 @@ class autoScrapper:
 if __name__ == "__main__":
     
     scrap_test= autoScrapper()
-    scrap_test.autoscrapping_one()
+    scrap_test.autoscrapping()
     
 
 

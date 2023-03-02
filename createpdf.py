@@ -195,13 +195,13 @@ class createPdfoperations:
             
             if self.singlefile == False:
                 try:
-                    pdf.output(f'pdfs/{course_name}_{formatted_date_time}.pdf', 'F')
+                    pdf.output(f'pdfs_many/{course_name}_{formatted_date_time}.pdf', 'F')
                 except Exception as e:
                     raise e
 
         if self.singlefile == True:
             try:
-                pdf.output(f'pdfs/all_courses_{formatted_date_time}.pdf', 'F')
+                pdf.output(f'pdfs_single/all_courses_{formatted_date_time}.pdf', 'F')
             except Exception as e:
                 raise e
 

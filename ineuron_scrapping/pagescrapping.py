@@ -83,7 +83,7 @@ class scrappingOperations:
             view_more_1 = driver.find_element(By.CSS_SELECTOR, "body > div:nth-child(1) > section:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > span:nth-child(3)")
             view_more_1.click()
         except Exception as e:
-            raise e
+            print("error at curr expand")
             
         time.sleep(1)
         
@@ -92,7 +92,7 @@ class scrappingOperations:
             view_more_2 = driver.find_element(By.CSS_SELECTOR, "body > div:nth-child(1) > section:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > span:nth-child(3)")
             view_more_2.click()
         except Exception as e: 
-            raise e
+            print("error at project expand")
         #actions = ActionChains(driver)
         #time.sleep(5)
         #actions.move_to_element(view_more).click().perform()
