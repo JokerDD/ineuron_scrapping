@@ -44,7 +44,7 @@ class autoScrapper:
             except Exception as e:
                 return False
             
-    def mongo_connection_check(self):
+    def mysql_connection_check(self):
         if self.dbsql.createCursor():
             return True
         else:
@@ -53,7 +53,7 @@ class autoScrapper:
     def autoscrapping(self):
         try:
             print("program is inside autoscrapping for loop") #debug
-            if self.mongo_connection_check() and self.mongo_connection_check():
+            if self.mongo_connection_check() and self.mysql_connection_check():
                 scrapper = scrappingOperations(chrome_options=self.chrome_options) # initialization of scrapping
                 source_link="https://ineuron.ai/courses"
                 all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=120)
@@ -64,7 +64,7 @@ class autoScrapper:
                     raise e
             
                 #for course_link in all_course_link_list:
-                for i in range(len(all_course_link_list),15):  #for testing a batch
+                for i in range(0,15):  #for testing a batch
 
                     course_link = all_course_link_list[i]  # for testing 
 
@@ -99,7 +99,7 @@ class autoScrapper:
     def autoscrapping_one(self):
         try:
             print("program is inside autoscrapping one")
-            if self.mongo_connection_check() and self.mongo_connection_check():
+            if self.mongo_connection_check() and self.mysql_connection_check():
                 scrapper = scrappingOperations(chrome_options=self.chrome_options) # initialization of scrapping
                 source_link="https://ineuron.ai/courses"
                 all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=15)
