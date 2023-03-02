@@ -10,6 +10,13 @@ now = datetime.datetime.now()
 formatted_date_time = now.strftime("%d_%b_%y")
 
 class createPdfoperations:
+    '''
+    desc : This class shall be used to create pdf files from mongo database
+    return : list of all the courses
+    Written By: Saif Ali
+    Version: 1
+    Revision: None
+    '''
 
     def __init__(self,username,password,dbName,collectionName, singlefile=True):
         self.username=username
@@ -20,12 +27,28 @@ class createPdfoperations:
         self.mongoobj=mongodb(self.username,self.password)
 
     def createDataframe(self):
-
+    
+        '''
+        desc : This method shall be used to create dataframe from the mongo database
+        return : dataframe object
+        Written By: Saif Ali
+        Version: 1
+        Revision: None
+        '''
         cursor = self.mongoobj.getData(self.dbName,self.collectionName)
         df_pdf = pd.DataFrame(list(cursor))
         return df_pdf
     
     def elementCheckDeclare(self,value):
+
+        '''
+        desc : This method shall be used to check if the column is present or not in the df, and return the value
+        return : str
+        Written By: Saif Ali
+        Version: 1
+        Revision: None
+        '''
+
         if isinstance(value,dict) and len(value)>0:
             return value
         elif isinstance(value,list) and len(value)>0:
@@ -42,8 +65,15 @@ class createPdfoperations:
         else:
             return False
         
-    def createPdf(self,df_pdf):
-
+    def createPdf(self):
+        '''
+        desc : This method shall be used to create pdf file from the df data
+        return : NaN
+        Written By: Saif Ali
+        Version: 1
+        Revision: None
+        '''
+        df_pdf=self.createDataframe()
         pdf = FPDF()
             # Add a new page to the PDF
         for df_i in range(len(df_pdf)):

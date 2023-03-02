@@ -182,6 +182,7 @@ class mongodbOperations:
                 data= collection.find()
                 return data
         except Exception as e:
+            
             raise e
 
 
