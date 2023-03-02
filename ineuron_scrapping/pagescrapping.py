@@ -96,7 +96,6 @@ class scrappingOperations:
         #actions = ActionChains(driver)
         #time.sleep(5)
         #actions.move_to_element(view_more).click().perform()
-
         topics_source = driver.page_source        
         bs_topic_wise_source = bs(topics_source, "html.parser")
                 
@@ -110,7 +109,6 @@ class scrappingOperations:
         Version: 1
         Revision: None
         '''         
-        
         text_data=text_data.encode('ascii','ignore')
         text_data=text_data.decode()
         return text_data
@@ -200,10 +198,7 @@ class scrappingOperations:
         "instructor_details" : instructor_dict
         }
 
-        
         #basic_data_list=[Topic,Subtopic,Course_Name,Course_Description,course_feeaturs,what_u_will_learn,requirements,instructor_dict]
-        
-
         #make above dictionary
         
         return basic_data_dict
@@ -216,7 +211,6 @@ class scrappingOperations:
         Version: 1
         Revision: None
         ''' 
-
         curr_and_proj_code=course_source_code_bs.findAll("div", {"class":"CurriculumAndProjects_course-curriculum__C9K5U CurriculumAndProjects_card__rF6YN card"})
 
         return curr_and_proj_code
@@ -230,10 +224,10 @@ class scrappingOperations:
         Version: 1
         Revision: None
         ''' 
-        
         curr_all=curr_and_proj_code[0].div.findAll("div", {"class":"CurriculumAndProjects_curriculum-accordion__fI8wj CurriculumAndProjects_card__rF6YN card"})
         all_curriculum_dict={}
         count_1=0
+
         for i in curr_all:
             course_desc_loop=i.findAll("div",{"class":"CurriculumAndProjects_course-curriculum-list__OBOTg"})
             key=i.div.text
@@ -242,14 +236,11 @@ class scrappingOperations:
                 text_data=j.text
                 
                 text_data=self.encode_decode(text_data)
-                
                 value.append(text_data)
                 count_1+=1
             all_curriculum_dict[key]=list(value)
             
         return all_curriculum_dict
-    
-
 
     def project_data(self,curr_and_proj_code):
 
@@ -260,7 +251,7 @@ class scrappingOperations:
         Version: 1
         Revision: None
         '''
-        
+
         try:
             project_all=curr_and_proj_code[1].div.findAll("div", {"class":"CurriculumAndProjects_curriculum-accordion__fI8wj CurriculumAndProjects_card__rF6YN card"})
             all_project_dict={}
