@@ -2,7 +2,7 @@ import pandas as pd
 from fpdf import FPDF
 import math
 import datetime
-from mongoDb import mongodb
+from mongoDb.mongodb import mongodbOperations
 
 
 now = datetime.datetime.now()
@@ -24,7 +24,7 @@ class createPdfoperations:
         self.dbName=dbName
         self.collectionName=collectionName
         self.singlefile=singlefile
-        self.mongoobj=mongodb(self.username,self.password)
+        self.mongoobj=mongodbOperations(self.username,self.password)
 
     def createDataframe(self):
     

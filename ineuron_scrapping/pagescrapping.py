@@ -19,7 +19,7 @@ class scrappingOperations:
 
     def __init__(self, chrome_options):
     
-        self.chrmoe_options=chrome_options
+        self.chrome_options=chrome_options
         
 
     def getAllCourseLink(self, source_link, load_time):
