@@ -79,7 +79,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            raise e
+            print('table already exists')
             
         try:
             self.mycursor.execute(f"""
@@ -89,7 +89,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            raise e
+            print('table already exists')
         
         try:
             self.mycursor.execute(f"""
@@ -99,7 +99,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            raise e
+            print('table already exists')
         
         try:
             self.mycursor.execute(f"""
@@ -109,7 +109,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            raise e
+            print('table already exists')
         
         try:
             self.mycursor.execute(f"""
@@ -120,7 +120,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            raise e
+            print('table already exists')
         
         try:
             self.mycursor.execute(f"""
@@ -131,7 +131,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            raise e
+            print('table already exists')
         
         try:
             self.mycursor.execute(f"""
@@ -143,7 +143,7 @@ class mysqlOpeartions:
             """)
             
         except Exception as e:
-            raise e
+            print('table already exists')
         
         return True
     
