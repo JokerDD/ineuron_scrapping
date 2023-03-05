@@ -1,14 +1,17 @@
 import pymongo
+import sys
+sys.path.append("C:\\Users\\saifa\\OneDrive\\Desktop\\ineuron projects\\my_own_ineuron_proj")
+from custom_logging.customLogger import custLogger
 
 class mongodbOperations:
 
     def __init__(self, username, password):
-        try:
-            self.username = username
-            self.password = password
-            self.url=f"mongodb+srv://{self.username}:{self.password}@cluster0.s896o.mongodb.net/?retryWrites=true&w=majority"
-        except Exception as e:
-            raise e
+        
+        self.username = username
+        self.password = password
+        self.url=f"mongodb+srv://{self.username}:{self.password}@cluster0.s896o.mongodb.net/?retryWrites=true&w=majority"
+        self.logger = custLogger("INFO")
+        
         
     def getMongoClient(self):
         '''
@@ -25,7 +28,8 @@ class mongodbOperations:
             client = pymongo.MongoClient(self.url)
             return client
         except Exception as e:
-            raise e
+            self.logger.custlogger().info(f"error at cursor creation with :: {e} ")
+            
 
     def getDatabase(self, dbName):
         '''
@@ -44,7 +48,7 @@ class mongodbOperations:
             database = client[dbName]
             return database
         except Exception as e:
-            raise e
+            self.logger.custlogger().info(f"error at getting database with :: {e} ")
         
     def getCollection(self, dbName, collectionName):
         '''
@@ -62,7 +66,7 @@ class mongodbOperations:
             collection = database[collectionName]
             return collection
         except Exception as e:
-            raise e
+            self.logger.custlogger().info(f"error at collection creation with :: {e} ")
         
     def isDatabasePresent(self, dbName):
         '''
@@ -83,7 +87,7 @@ class mongodbOperations:
             else:
                 return False
         except Exception as e:
-            raise e
+            self.logger.custlogger().info(f"error at database check with :: {e} ")
         
     
     def isCollectionPresent(self, dbName, collectionName):
@@ -107,7 +111,7 @@ class mongodbOperations:
             else:
                 return False
         except Exception as e:
-            raise e
+            self.logger.custlogger().info(f"error at collection check with :: {e} ")
         
 
     
@@ -127,7 +131,7 @@ class mongodbOperations:
             client = self.getMongoClient()
             database = client[dbName]
         except Exception as e:
-            raise e
+            self.logger.custlogger().info(f"error at database create with :: {e} ")
 
     def createCollection(self, dbName, collectionName):
         '''
@@ -144,7 +148,7 @@ class mongodbOperations:
             database = self.getDatabase(dbName)
             collection = database[collectionName]
         except Exception as e:
-            raise e
+            self.logger.custlogger().info(f"error at collection create with :: {e} ")
         
     def insertOneData(self,dbName,collectionName,data):
         '''
@@ -162,7 +166,7 @@ class mongodbOperations:
             collection = self.getCollection(dbName, collectionName)
             collection.insert_one(data)
         except Exception as e:
-            raise e
+            self.logger.custlogger().info(f"error at insertion with :: {e} ")
         
     def getData(self,dbName, collectionName):
         '''
@@ -183,7 +187,7 @@ class mongodbOperations:
                 return data
         except Exception as e:
             
-            raise e
+            self.logger.custlogger().info(f"error at importing all data at once with :: {e} ")
 
 
 

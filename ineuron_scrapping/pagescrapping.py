@@ -4,8 +4,11 @@ import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-
 from bs4 import BeautifulSoup as bs
+import sys
+sys.path.append("C:\\Users\\saifa\\OneDrive\\Desktop\\ineuron projects\\my_own_ineuron_proj")
+from custom_logging.customLogger import custLogger
+
 
 
 class scrappingOperations:
@@ -20,6 +23,7 @@ class scrappingOperations:
     def __init__(self, chrome_options):
     
         self.chrome_options=chrome_options
+        self.logger=custLogger()
         
 
     def getAllCourseLink(self, source_link, load_time):
@@ -57,7 +61,7 @@ class scrappingOperations:
 
             return distinct_course_links_list
         except Exception as e:
-            raise e
+            self.logger.custlogger().error(f"error at getting course link with :: {e} ")
         
     def get_course_code(self,course_links):
     
@@ -83,7 +87,7 @@ class scrappingOperations:
             view_more_1 = driver.find_element(By.CSS_SELECTOR, "body > div:nth-child(1) > section:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > span:nth-child(3)")
             view_more_1.click()
         except Exception as e:
-            print("error at curr expand")
+            self.logger.custlogger().debug(f"error at expanding curr with :: {e} ")
             
         time.sleep(1)
         
@@ -92,7 +96,7 @@ class scrappingOperations:
             view_more_2 = driver.find_element(By.CSS_SELECTOR, "body > div:nth-child(1) > section:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > span:nth-child(3)")
             view_more_2.click()
         except Exception as e: 
-            print("error at project expand")
+            self.logger.custlogger().debug(f"error at expanding project with :: {e} ")
         #actions = ActionChains(driver)
         #time.sleep(5)
         #actions.move_to_element(view_more).click().perform()
@@ -129,6 +133,7 @@ class scrappingOperations:
             Topic=self.encode_decode(Topic)
         except Exception as e:
             #logging.info(f'error at topic {e}')
+            self.logger.custlogger().info(f"error at fetching Topic name code with :: {e} ")
             Topic='Null'
         
         try:
@@ -136,6 +141,7 @@ class scrappingOperations:
             Subtopic=self.encode_decode(Subtopic)
         except Exception as e:
             #logging.info(f'error at subtop : {e}')
+            self.logger.custlogger().info(f"error at fetching subtopic name code with :: {e} ")
             Subtopic='Null'
         
         try:
@@ -143,6 +149,7 @@ class scrappingOperations:
             Course_Name=self.encode_decode(Course_Name)
         except Exception as e:
             #logging.info(f'error at subtop : {e}')
+            self.logger.custlogger().info(f"error at fetching Course_Name name code with :: {e} ")
             Course_Name='Null'
 
         try:
@@ -150,6 +157,7 @@ class scrappingOperations:
             Course_Description=self.encode_decode(Course_Description)
         except Exception as e:
             #logging.info(f'error at Course_Description : {e}')
+            self.logger.custlogger().info(f"error at fetching Course_Description name code with :: {e} ")
             Course_Description='Null'
         
         try:
@@ -157,6 +165,7 @@ class scrappingOperations:
             course_feeaturs=[self.encode_decode(feature.text) for feature in course_feeaturs]
         except Exception as e:
             #logging.info(f'error at course_feeaturs : {e}')
+            self.logger.custlogger().info(f"error at fetching course_feeaturs name code with :: {e} ")
             course_feeaturs='Null'
         
         try:
@@ -164,13 +173,14 @@ class scrappingOperations:
             what_u_will_learn=[self.encode_decode(topics.text) for topics in what_u_will_learn]
         except Exception as e:
             #logging.info(f'error at what_u_will_learn : {e}')
+            self.logger.custlogger().info(f"error at fetching what_u_will_learn data code with :: {e} ")
             what_u_will_learn='Null'
 
         try:
             requirements=course_source_code_bs.findAll("div", {"class": "CourseRequirement_card__lKmHf requirements card"})[0].findAll("li")
             requirements=[self.encode_decode(require.text) for require in requirements]
         except Exception as e:
-            
+            self.logger.custlogger().info(f"error at fetching requirements data code with :: {e} ")
             requirements='Null'
             #raise e
 
@@ -183,7 +193,7 @@ class scrappingOperations:
                 value=self.encode_decode(value)
                 instructor_dict[key]=value
         except Exception as e:
-            
+            self.logger.custlogger().info(f"error at fetching instructor_dict data code with :: {e} ")
             instructor_dict='Null'
             #raise e
         
@@ -224,21 +234,25 @@ class scrappingOperations:
         Version: 1
         Revision: None
         ''' 
-        curr_all=curr_and_proj_code[0].div.findAll("div", {"class":"CurriculumAndProjects_curriculum-accordion__fI8wj CurriculumAndProjects_card__rF6YN card"})
-        all_curriculum_dict={}
-        count_1=0
+        try:
+            curr_all=curr_and_proj_code[0].div.findAll("div", {"class":"CurriculumAndProjects_curriculum-accordion__fI8wj CurriculumAndProjects_card__rF6YN card"})
+            all_curriculum_dict={}
+            count_1=0
 
-        for i in curr_all:
-            course_desc_loop=i.findAll("div",{"class":"CurriculumAndProjects_course-curriculum-list__OBOTg"})
-            key=i.div.text
-            value=[]
-            for j in course_desc_loop:
-                text_data=j.text
-                
-                text_data=self.encode_decode(text_data)
-                value.append(text_data)
-                count_1+=1
-            all_curriculum_dict[key]=list(value)
+            for i in curr_all:
+                course_desc_loop=i.findAll("div",{"class":"CurriculumAndProjects_course-curriculum-list__OBOTg"})
+                key=i.div.text
+                key=self.encode_decode(key)
+                value=[]
+                for j in course_desc_loop:
+                    text_data=j.text
+                    
+                    text_data=self.encode_decode(text_data)
+                    value.append(text_data)
+                    count_1+=1
+                all_curriculum_dict[key]=list(value)
+        except Exception as e:
+            self.logger.custlogger().info(f"error at fetching curr data code with :: {e} ")
             
         return all_curriculum_dict
 
@@ -259,6 +273,7 @@ class scrappingOperations:
             for i in project_all:
                 project_desc_loop=i.findAll("div",{"class":"CurriculumAndProjects_course-curriculum-list__OBOTg"})
                 key=i.div.text
+                key=self.encode_decode(key)
                 value=[]
                 for j in project_desc_loop:
                     text_data=j.text
@@ -268,6 +283,7 @@ class scrappingOperations:
                 all_project_dict[key]=list(value)
         except Exception as e:
             #logging.error(f"error at project --> {e}")
+            self.logger.custlogger().info(f"error at fetching project data code with :: {e} ")
             all_project_dict = False
         
         return all_project_dict

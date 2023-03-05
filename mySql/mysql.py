@@ -1,4 +1,8 @@
 import mysql.connector 
+import sys
+sys.path.append("C:\\Users\\saifa\\OneDrive\\Desktop\\ineuron projects\\my_own_ineuron_proj")
+
+from custom_logging.customLogger import custLogger
 
 class mysqlOpeartions:
 
@@ -15,6 +19,7 @@ class mysqlOpeartions:
         self.host =host
         self.mydb=self.myDb()
         self.mycursor = self.createCursor()
+        self.logger = custLogger("INFO")
 
     def myDb(self):
 
@@ -47,6 +52,7 @@ class mysqlOpeartions:
         try:
             mycursor = self.mydb.cursor()
         except Exception as e:
+            self.logger.custlogger().info(f"error at cursor creation with :: {e} ")
             mycursor=False
         return mycursor
     
@@ -79,6 +85,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
+            self.logger.custlogger().info(f"error at table all_course creation with :: {e} ")
             print('table already exists')
             
         try:
@@ -89,6 +96,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
+            self.logger.custlogger().info(f"error at table all_features creation with :: {e} ")
             print('table already exists')
         
         try:
@@ -99,6 +107,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
+            self.logger.custlogger().info(f"error at table all_what_you_will_learn creation with :: {e} ")
             print('table already exists')
         
         try:
@@ -109,6 +118,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
+            self.logger.custlogger().info(f"error at table all_requirenments creation with :: {e} ")
             print('table already exists')
         
         try:
@@ -120,6 +130,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
+            self.logger.custlogger().info(f"error at table all_curriculum creation with :: {e} ")
             print('table already exists')
         
         try:
@@ -131,6 +142,7 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
+            self.logger.custlogger().info(f"error at table all_projects creation with :: {e} ")
             print('table already exists')
         
         try:
@@ -143,6 +155,7 @@ class mysqlOpeartions:
             """)
             
         except Exception as e:
+            self.logger.custlogger().info(f"error at table all_instructors creation with :: {e} ")
             print('table already exists')
         
         return True
@@ -159,19 +172,21 @@ class mysqlOpeartions:
 
         try:
             self.mycursor.execute(f""" 
-            insert into ineuron_course.all_course values ("{course_link}","{basic_data["topic"]}","{basic_data["subtopic"]}","{basic_data["Course_Name"]}","{basic_data["Course_Description"]}")
+            insert into ineuron_course.all_course values ("{course_link}","{basic_data["topic"]}","{basic_data["sub_topic"]}","{basic_data["course_name"]}","{basic_data["course_description"]}")
             """)
             
         except Exception as e:
+            self.logger.custlogger().critical(f"error at insert on table all_course with :: {e} ")
             return False
             
         try:
-            for i in basic_data["course_feeaturs"]:
+            for i in basic_data["course_feature"]:
                 self.mycursor.execute(f""" 
                 insert into ineuron_course.all_features values ("{course_link}","{i}");
                 """)
 
         except Exception as e:
+            self.logger.custlogger().critical(f"error at insert on table all_features with :: {e} ")
             return False
         
         try:
@@ -180,6 +195,7 @@ class mysqlOpeartions:
                 insert into ineuron_course.all_what_you_will_learn values ("{course_link}","{i}");
                 """)
         except Exception as e:
+            self.logger.custlogger().critical(f"error at insert on table all_what_you_will_learn with :: {e} ")
             return False
             
         try:
@@ -188,6 +204,7 @@ class mysqlOpeartions:
                 insert into ineuron_course.all_requirenments values ("{course_link}","{i}");
                 """)
         except Exception as e:
+            self.logger.custlogger().critical(f"error at insert on table all_requirenments with :: {e} ")
             return False
         
         return True
@@ -209,6 +226,7 @@ class mysqlOpeartions:
                     values=values.strip()
                     self.mycursor.execute(f"""insert into ineuron_course.all_instructors values ("{course_link}","{key}","{values}")""")
         except Exception as e:
+            self.logger.custlogger().critical(f"error at insert with :: {e} ")
             return False
             
         
@@ -234,6 +252,7 @@ class mysqlOpeartions:
                         i=i.strip()
                         self.mycursor.execute(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key}","{i}")""")
         except Exception as e:
+            self.logger.custlogger().critical(f"error at insert with :: {e} ")
             return False
             
         return True
@@ -264,6 +283,7 @@ class mysqlOpeartions:
                             i=i.strip()
                             self.mycursor.execute(f"""insert into ineuron_course.all_projects values ("{course_link}","{key}","{i}")""")
             except Exception as e:
+                self.logger.custlogger().info(f"error at insert with :: {e} ")
                 return False
             
             return True
@@ -295,11 +315,11 @@ class mysqlOpeartions:
             if commit_1==commit_2==commit_3==commit_4==True:
                 self.mydb.commit()
             else:
-                self.mydb.rollback()
+                self.mydb.commit()
+                #self.mydb.rollback()
             
         except Exception as e:
-            
-            raise e
+            self.logger.custlogger().critical(f"error in master sql method with :: {e} ")
 
 
 
