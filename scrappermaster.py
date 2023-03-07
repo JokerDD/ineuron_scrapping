@@ -66,12 +66,13 @@ class autoScrapper:
                 self.dbsql.createTables(schema_name="ineuron_course")
             except Exception as e:
                 self.logger.custlogger().error("failed creating tables in mySQL")
-            
+            counter=0
             #for course_link in all_course_link_list:
-            for i in range(0,30):  #for testing a batch
+            logger_instance=self.logger.custlogger()
+            for i in range(0,50):  #for testing a batch
 
                 course_link = all_course_link_list[i]  # for testing 
-
+                logger_instance.info(f" course link :: {course_link}")
                 course_code_bs=scrapper.get_course_code(course_link)
                 course_data_dict=scrapper.basic_course_data(course_code_bs)
                 curr_project_code=scrapper.curr_and_proj(course_code_bs)
@@ -79,28 +80,41 @@ class autoScrapper:
                 project_data_dict=scrapper.project_data(curr_project_code)
 
                 course_data_dict["course_link"] = course_link
-                course_data_dict["curriculum_details"] = curr_data_dict
+                #course_data_dict["curriculum_details"] = curr_data_dict
+
+                if curr_data_dict:
+                    course_data_dict["curriculum_details"] = curr_data_dict
+                    curr_track=True
+                else:
+                    curr_track=False
+                    logger_instance.info(f"curr is not present in this course :: {course_link}")
 
                 if project_data_dict:
                     course_data_dict["project_details"] = project_data_dict
                     project_track=True
                 else:
                     project_track=False
+                    logger_instance.info(f"project not present in {course_link}")
                 
                 try:
                     self.dbOps.insertOneData(dbName="i_nearon_scrapping",collectionName="course_data",data=course_data_dict)
                 except Exception as e:
-                    self.logger.custlogger().info(f"error at mongo db insert with :: {e}")
+                    logger_instance.info(f"error at mongo db insert with :: {e}")
 
                 try:
-                    self.dbsql.masterInsertSql(course_link=course_link,course_data_dict=course_data_dict,project_track=project_track)
+                    self.dbsql.masterInsertSql(course_link=course_link,course_data_dict=course_data_dict,project_track=project_track,curr_track=curr_track)
                 except Exception as e:
-                    self.logger.custlogger().info(f"error at mysql db insert with :: {e}")
+                    logger_instance.info(f"error at mysql db insert with :: {e}")
+
+                counter+=1
+
+                
             try:
                 self.pdfobj.createPdf()
             except Exception as e:
                 self.logger.custlogger().info(f"error at create pdf with :: {e}")
             print("all completed")
+            print(counter)
 
         else:
             print("check connections please")
@@ -113,15 +127,19 @@ class autoScrapper:
         print("program is inside autoscrapping one")
         if self.mongo_connection_check() and self.mysql_connection_check():
             scrapper = scrappingOperations(chrome_options=self.chrome_options) # initialization of scrapping
+            
             source_link="https://ineuron.ai/courses"
-            all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=30)
+            #all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=30)
 
             try:
                 self.dbsql.createTables(schema_name="ineuron_course")
             except Exception as e:
                 raise e
 
-            course_link=all_course_link_list[2] # manually entering which course to scrap
+            #INDEX_TEST=all_course_link_list.index('https://ineuron.ai/course/Data-Science-Masters')
+
+            #course_link=all_course_link_list[INDEX_TEST] # manually entering which course to scrap
+            course_link="https://ineuron.ai/course/Full-Stack-Data-Science-Feb'21-Batch"           
 
             course_code_bs=scrapper.get_course_code(course_link)
             course_data_dict=scrapper.basic_course_data(course_code_bs)
@@ -132,6 +150,13 @@ class autoScrapper:
             course_data_dict["course_link"] = course_link
             course_data_dict["curriculum_details"] = curr_data_dict
 
+            if curr_data_dict:
+                course_data_dict["curriculum_details"] = curr_data_dict
+                curr_track=True
+            else:
+                curr_track=False
+                self.logger.custlogger().info(f"curr is not present in this course :: {course_link}")
+
             if project_data_dict:
                 course_data_dict["project_details"] = project_data_dict
                 project_track=True
@@ -139,15 +164,14 @@ class autoScrapper:
                 project_track=False
                 self.logger.custlogger().info(f"project is not present in this course :: {course_link}")
 
-            print(type(course_data_dict))
-
+            
             try:
                 self.dbOps.insertOneData(dbName="i_nearon_scrapping",collectionName="course_data",data=course_data_dict)
             except Exception as e:
                 self.logger.custlogger().info(f"error at mongo db insert with :: {e}")
-
+            
             try:
-                self.dbsql.masterInsertSql(course_link=course_link,course_data_dict=course_data_dict,project_track=project_track)
+                self.dbsql.masterInsertSql(course_link=course_link,course_data_dict=course_data_dict,project_track=project_track,curr_track=curr_track)
             except Exception as e:
                 self.logger.custlogger().info(f"error at mysql db insert with :: {e}")
             try:
