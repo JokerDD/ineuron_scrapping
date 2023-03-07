@@ -48,7 +48,7 @@ class createPdfoperations:
             self.logger.custlogger().error(f"error at creating dataframe with :: {e}")
             return False
     
-    def elementCheckDeclare(self,column_name,loop_number,df_name):
+    def elementCheckDeclare(self,column_name,loop_number,df_name,log_instance):
 
         '''
         desc : This method shall be used to check if the column is present or not in the df, and return the value
@@ -76,7 +76,10 @@ class createPdfoperations:
             else:
                 return False
         except Exception as e:
-            self.logger.custlogger().error(f"possibly column {column_name} not present in df with error :: {e}")
+            if column_name=='project_details':
+                log_instance.debug(f"possibly column {column_name} not present in df with error :: {e}")
+            else:
+                log_instance.error(f"possibly column {column_name} not present in df with error :: {e}")
             return False
 
         
@@ -96,20 +99,21 @@ class createPdfoperations:
             if not df_pdf.empty:
                 pdf = FPDF()
                     # Add a new page to the PDF
+                logger_instance=self.logger.custlogger()
                 for df_i in range(len(df_pdf)):
                     
 
-                    course_link=self.elementCheckDeclare(column_name='course_link',loop_number=df_i,df_name=df_pdf)
-                    topic_name=self.elementCheckDeclare(column_name='topic',loop_number=df_i,df_name=df_pdf)
-                    sub_topic_name=self.elementCheckDeclare(column_name='sub_topic',loop_number=df_i,df_name=df_pdf)
-                    course_name=self.elementCheckDeclare(column_name='course_name',loop_number=df_i,df_name=df_pdf)
-                    course_descript=self.elementCheckDeclare(column_name='course_description',loop_number=df_i,df_name=df_pdf)
-                    course_feature=self.elementCheckDeclare(column_name='course_feature',loop_number=df_i,df_name=df_pdf)
-                    what_u_will_learn=self.elementCheckDeclare(column_name='what_u_will_learn',loop_number=df_i,df_name=df_pdf)
-                    requirements=self.elementCheckDeclare(column_name='requirements',loop_number=df_i,df_name=df_pdf)
-                    instructor_details=self.elementCheckDeclare(column_name='instructor_details',loop_number=df_i,df_name=df_pdf)
-                    curriculum_details=self.elementCheckDeclare(column_name='curriculum_details',loop_number=df_i,df_name=df_pdf)
-                    project_details=self.elementCheckDeclare(column_name='project_details',loop_number=df_i,df_name=df_pdf)
+                    course_link=self.elementCheckDeclare(column_name='course_link',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
+                    topic_name=self.elementCheckDeclare(column_name='topic',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
+                    sub_topic_name=self.elementCheckDeclare(column_name='sub_topic',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
+                    course_name=self.elementCheckDeclare(column_name='course_name',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
+                    course_descript=self.elementCheckDeclare(column_name='course_description',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
+                    course_feature=self.elementCheckDeclare(column_name='course_feature',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
+                    what_u_will_learn=self.elementCheckDeclare(column_name='what_u_will_learn',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
+                    requirements=self.elementCheckDeclare(column_name='requirements',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
+                    instructor_details=self.elementCheckDeclare(column_name='instructor_details',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
+                    curriculum_details=self.elementCheckDeclare(column_name='curriculum_details',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
+                    project_details=self.elementCheckDeclare(column_name='project_details',loop_number=df_i,df_name=df_pdf,log_instance=logger_instance)
                     """
                     course_link=self.elementCheckDeclare(df_pdf['course_link'][df_i])
                     topic_name=self.elementCheckDeclare(df_pdf['topic'][df_i])
@@ -230,7 +234,7 @@ class createPdfoperations:
                         try:
                             pdf.output(f'pdfs_many/{course_name}_{formatted_date_time}.pdf', 'F')
                         except Exception as e:
-                            self.logger.custlogger().error(f"error at creating many pdf file with :: {e}")
+                            logger_instance.error(f"error at creating many pdf file with :: {e}")
 
                 if self.singlefile == True:
                     try:

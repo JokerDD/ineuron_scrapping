@@ -169,40 +169,43 @@ class mysqlOpeartions:
         Version: 1
         Revision: None
         '''
+        try:
+            sql_1="insert into ineuron_course.all_course values (%s,%s,%s,%s,%s)"
+            all_course_value=(course_link,basic_data["topic"],basic_data["sub_topic"],basic_data["course_name"],basic_data["course_description"])
+
+            sql_2="insert into ineuron_course.all_features values (%s,%s)"
+            all_features_value=[(course_link,i) for i in basic_data["course_feature"]]
+
+            sql_3="insert into ineuron_course.all_what_you_will_learn values (%s,%s)"
+            what_u_will_learn_value=[(course_link,i) for i in basic_data["what_u_will_learn"]]
+
+            sql_4="insert into ineuron_course.all_requirenments values (%s,%s)"
+            all_requirenments_value=[(course_link,i) for i in basic_data["requirements"]]
+        except Exception as e:
+            self.logger.custlogger().critical(f"error at qury build with :: {e} ")
 
         try:
-            self.mycursor.execute(f""" 
-            insert into ineuron_course.all_course values ("{course_link}","{basic_data["topic"]}","{basic_data["sub_topic"]}","{basic_data["course_name"]}","{basic_data["course_description"]}")
-            """)
+            self.mycursor.execute(sql_1,all_course_value)
             
         except Exception as e:
             self.logger.custlogger().critical(f"error at insert on table all_course with :: {e} ")
             return False
             
         try:
-            for i in basic_data["course_feature"]:
-                self.mycursor.execute(f""" 
-                insert into ineuron_course.all_features values ("{course_link}","{i}");
-                """)
+            self.mycursor.executemany(sql_2,all_features_value)
 
         except Exception as e:
             self.logger.custlogger().critical(f"error at insert on table all_features with :: {e} ")
             return False
         
         try:
-            for i in basic_data["what_u_will_learn"]:
-                self.mycursor.execute(f""" 
-                insert into ineuron_course.all_what_you_will_learn values ("{course_link}","{i}");
-                """)
+            self.mycursor.executemany(sql_3,what_u_will_learn_value)
         except Exception as e:
             self.logger.custlogger().critical(f"error at insert on table all_what_you_will_learn with :: {e} ")
             return False
             
         try:
-            for i in basic_data["requirements"]:
-                self.mycursor.execute(f""" 
-                insert into ineuron_course.all_requirenments values ("{course_link}","{i}");
-                """)
+            self.mycursor.executemany(sql_4,all_requirenments_value)
         except Exception as e:
             self.logger.custlogger().critical(f"error at insert on table all_requirenments with :: {e} ")
             return False
@@ -218,13 +221,17 @@ class mysqlOpeartions:
         Revision: None
         '''
         try:
+            sql_1="insert into ineuron_course.all_instructors values (%s,%s,%s)"
             for key, values in mentor_dict.items():
                 key=key.strip()
                 if not len(values):
-                    self.mycursor.execute(f"""insert into ineuron_course.all_instructors values ("{course_link}","{key}",'null')""")
+                    mentor_value=(course_link,key,'NULL')
+                    
                 else:
                     values=values.strip()
-                    self.mycursor.execute(f"""insert into ineuron_course.all_instructors values ("{course_link}","{key}","{values}")""")
+                    mentor_value=(course_link,key,values)
+                    
+                self.mycursor.execute(sql_1,mentor_value)
         except Exception as e:
             self.logger.custlogger().critical(f"error at insert with :: {e} ")
             return False
@@ -242,24 +249,43 @@ class mysqlOpeartions:
         Revision: None
         '''
         try:
+            sql_1="insert into ineuron_course.all_curriculum values (%s,%s,%s)"
+            
+            course_link_lst=[course_link]
             for key, values in dictionary.items():
                 key=key.strip()
                 if not len(values):
-                    self.mycursor.execute(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key}","null")""")
-                    
+                    curr_value=(course_link_lst[0],key,'NULL')
                 else:
-                    for i in values:
-                        i=i.strip()
-                        self.mycursor.execute(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key}","{i}")""")
+                    curr_value=[(course_link_lst[0],key,i.strip()) for i in values]
+                    
+                self.mycursor.executemany(sql_1,curr_value)
         except Exception as e:
-            self.logger.custlogger().critical(f"error at insert with :: {e} ")
-            return False
-            
+            try:
+                for key, values in dictionary.items():
+                    key=key.strip()
+                    if not len(values):
+                        self.mycursor.execute(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key}","null")""")
+                        
+                    else:
+                        key_temp=key
+                        for i in values:
+                            i=i.strip()
+                            
+                            i_temp=i
+                            self.mycursor.execute(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key}","{i}")""")
+                            del i_temp
+                        del key_temp
+                        
+
+            except Exception as e1:
+                self.logger.custlogger().critical(f' insert failed for curriculum with error :: {e1}')
+                self.logger.custlogger().critical(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key_temp}","{i_temp}")""")
+                
+                return False
         return True
     
 
-
-    
     def insertProjectData(self,course_link,dictionary):
 
         '''
@@ -274,20 +300,22 @@ class mysqlOpeartions:
             return True
         else:
             try:
+                course_link=[course_link]
+                sql_1="insert into ineuron_course.all_projects values (%s,%s,%s)"
                 for key, values in dictionary.items():
                     key=key.strip()
                     if not len(values):
-                        self.mycursor.execute(f"""insert into ineuron_course.all_projects values ("{course_link}","{key}",'null')""")
+                        project_values=(course_link[0],key,'NULL')    
                     else:
-                        for i in values:
-                            i=i.strip()
-                            self.mycursor.execute(f"""insert into ineuron_course.all_projects values ("{course_link}","{key}","{i}")""")
+                        project_values=[(course_link[0],key,i.strip()) for i in values]
+
+                    self.mycursor.executemany(sql_1,project_values)
             except Exception as e:
                 self.logger.custlogger().info(f"error at insert with :: {e} ")
                 return False
             
             return True
-    def masterInsertSql(self,course_link,course_data_dict,project_track):
+    def masterInsertSql(self,course_link,course_data_dict,project_track,curr_track):
         
         '''
         desc : This method will call all the other methods of the class to insert the required data, this method will pass the correct data to them 
@@ -300,23 +328,26 @@ class mysqlOpeartions:
 
         try:
             
-                       
             commit_1=self.insertBasicData(course_link,course_data_dict)
 
             commit_2=self.insertMentorData(course_link,course_data_dict["instructor_details"])
 
-            commit_3=self.insertCurrData(course_link,course_data_dict["curriculum_details"])
+            if curr_track:
+                commit_3=self.insertCurrData(course_link,course_data_dict["curriculum_details"])
+            else:
+                commit_3=True  # becuase if there is no project inn the source still we want to insert the shole data in mysql
 
             if project_track:
                 commit_4=self.insertProjectData(course_link,course_data_dict["project_details"])
             else:
-                commit_4=True
+                commit_4=True # becuase if there is no project inn the source still we want to insert the shole data in mysql
             
             if commit_1==commit_2==commit_3==commit_4==True:
                 self.mydb.commit()
             else:
                 self.mydb.commit()
                 #self.mydb.rollback()
+                self.logger.custlogger().critical(f"rollback is triggered, please check logs for the mysql errors")
             
         except Exception as e:
             self.logger.custlogger().critical(f"error in master sql method with :: {e} ")

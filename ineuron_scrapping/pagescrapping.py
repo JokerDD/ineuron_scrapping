@@ -10,7 +10,6 @@ sys.path.append("C:\\Users\\saifa\\OneDrive\\Desktop\\ineuron projects\\my_own_i
 from custom_logging.customLogger import custLogger
 
 
-
 class scrappingOperations:
     '''
     desc : This class shall be used to scrap the ineuron courses page
@@ -253,7 +252,7 @@ class scrappingOperations:
                 all_curriculum_dict[key]=list(value)
         except Exception as e:
             self.logger.custlogger().info(f"error at fetching curr data code with :: {e} ")
-            
+            all_curriculum_dict=False
         return all_curriculum_dict
 
     def project_data(self,curr_and_proj_code):
@@ -283,7 +282,7 @@ class scrappingOperations:
                 all_project_dict[key]=list(value)
         except Exception as e:
             #logging.error(f"error at project --> {e}")
-            self.logger.custlogger().info(f"error at fetching project data code with :: {e} ")
+            self.logger.custlogger().debug(f"error at fetching project data code with :: {e} ")
             all_project_dict = False
         
         return all_project_dict

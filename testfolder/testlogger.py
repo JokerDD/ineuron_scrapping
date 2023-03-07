@@ -9,9 +9,18 @@ class testing:
 
     def __init__(self):
         self.logger = custLogger("DEBUG")
+        self.test_list=['saif','sharique','shadan','shakil','shama']
     def raise_exception(self):
-
-        self.logger.custlogger().info(f"new testing of logger")
+        logger_instance = self.logger.custlogger()
+        logger_instance.info(f"###################################")
+        for i in self.test_list:
+            
+            logger_instance.info(f"testing multiple value {i}")
+            print(i)
+        for i in self.test_list:
+            
+            logger_instance.info(f"testing multiple second value {i}")
+            print(i)
             
 
 
