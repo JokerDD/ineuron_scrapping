@@ -60,7 +60,7 @@ class autoScrapper:
         if self.mongo_connection_check() and self.mysql_connection_check():
             scrapper = scrappingOperations(chrome_options=self.chrome_options) # initialization of scrapping
             source_link="https://ineuron.ai/courses"
-            all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=120)
+            all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=30)
 
             try:
                 self.dbsql.createTables(schema_name="ineuron_course")
@@ -69,10 +69,10 @@ class autoScrapper:
             counter=0
             #for course_link in all_course_link_list:
             logger_instance=self.logger.custlogger()
-            for i in range(0,50):  #for testing a batch
+            for i in range(0,10):  #for testing a batch
 
                 course_link = all_course_link_list[i]  # for testing 
-                logger_instance.info(f" course link :: {course_link}")
+                logger_instance.info(f" course link -----------------------> {course_link}")
                 course_code_bs=scrapper.get_course_code(course_link)
                 course_data_dict=scrapper.basic_course_data(course_code_bs)
                 curr_project_code=scrapper.curr_and_proj(course_code_bs)
@@ -139,7 +139,7 @@ class autoScrapper:
             #INDEX_TEST=all_course_link_list.index('https://ineuron.ai/course/Data-Science-Masters')
 
             #course_link=all_course_link_list[INDEX_TEST] # manually entering which course to scrap
-            course_link="https://ineuron.ai/course/Full-Stack-Data-Science-Feb'21-Batch"           
+            course_link="https://ineuron.ai/course/Deep-Learning-With-Computer-Vision-and-Advanced-NLP"           
 
             course_code_bs=scrapper.get_course_code(course_link)
             course_data_dict=scrapper.basic_course_data(course_code_bs)
@@ -188,6 +188,9 @@ if __name__ == "__main__":
     
     scrap_test= autoScrapper()
     scrap_test.autoscrapping()
+    
+    #autoscrapping_one
+    #autoscrapping
     
 
 

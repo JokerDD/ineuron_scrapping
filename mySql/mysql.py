@@ -345,9 +345,10 @@ class mysqlOpeartions:
             if commit_1==commit_2==commit_3==commit_4==True:
                 self.mydb.commit()
             else:
-                self.mydb.commit()
-                #self.mydb.rollback()
-                self.logger.custlogger().critical(f"rollback is triggered, please check logs for the mysql errors")
+                self.logger.custlogger().critical(f"rollback is triggered for {course_link}, please check logs for the mysql errors")
+                #self.mydb.commit()
+                self.mydb.rollback()
+                
             
         except Exception as e:
             self.logger.custlogger().critical(f"error in master sql method with :: {e} ")

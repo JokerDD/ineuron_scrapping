@@ -2038,3 +2038,39 @@
 2023-03-08 02:25:12,626 - mysql.py | insertCurrData | lineno-253 - INFO - course_link :: https://ineuron.ai/course/Class-6th-Chemistry 
 2023-03-08 02:25:12,626 - mysql.py | insertCurrData | lineno-253 - INFO - course_link :: https://ineuron.ai/course/Class-6th-Chemistry 
 2023-03-08 02:25:12,626 - mysql.py | insertCurrData | lineno-253 - INFO - course_link :: https://ineuron.ai/course/Class-6th-Chemistry 
+2023-03-09 01:25:20,051 - scrappermaster.py | autoscrapping_one | lineno-125 - INFO - Application start##############################################
+2023-03-09 01:25:21,488 - scrappermaster.py | mongo_connection_check | lineno-42 - INFO - collection created in mongo db
+2023-03-09 01:30:01,188 - scrappermaster.py | autoscrapping | lineno-58 - INFO - Application start##############################################
+2023-03-09 01:30:40,627 - mysql.py | createTables | lineno-88 - INFO - error at table all_course creation with :: 1050 (42S01): Table 'all_course' already exists 
+2023-03-09 01:30:40,639 - mysql.py | createTables | lineno-99 - INFO - error at table all_features creation with :: 1050 (42S01): Table 'all_features' already exists 
+2023-03-09 01:30:40,642 - mysql.py | createTables | lineno-110 - INFO - error at table all_what_you_will_learn creation with :: 1050 (42S01): Table 'all_what_you_will_learn' already exists 
+2023-03-09 01:30:40,646 - mysql.py | createTables | lineno-121 - INFO - error at table all_requirenments creation with :: 1050 (42S01): Table 'all_requirenments' already exists 
+2023-03-09 01:30:40,650 - mysql.py | createTables | lineno-133 - INFO - error at table all_curriculum creation with :: 1050 (42S01): Table 'all_curriculum' already exists 
+2023-03-09 01:30:40,654 - mysql.py | createTables | lineno-145 - INFO - error at table all_projects creation with :: 1050 (42S01): Table 'all_projects' already exists 
+2023-03-09 01:30:40,658 - mysql.py | createTables | lineno-158 - INFO - error at table all_instructors creation with :: 1050 (42S01): Table 'all_instructors' already exists 
+2023-03-09 01:30:40,660 - scrappermaster.py | autoscrapping | lineno-71 - INFO -  course link :: https://ineuron.ai/course/Digital-Marketing-and-Youtube-Niche-Foundations
+2023-03-09 01:30:49,894 - scrappermaster.py | autoscrapping | lineno-71 - INFO - project not present in https://ineuron.ai/course/Digital-Marketing-and-Youtube-Niche-Foundations
+2023-03-09 01:30:50,840 - scrappermaster.py | autoscrapping | lineno-71 - INFO -  course link :: https://ineuron.ai/course/Mastering-DSA-with-Python
+2023-03-09 01:31:00,459 - scrappermaster.py | autoscrapping | lineno-71 - INFO - project not present in https://ineuron.ai/course/Mastering-DSA-with-Python
+2023-03-09 01:31:01,293 - scrappermaster.py | autoscrapping | lineno-71 - INFO -  course link :: https://ineuron.ai/course/Youtube-Mastery-Course-in-Hindi-Tech-Neuron
+2023-03-09 01:31:10,524 - scrappermaster.py | autoscrapping | lineno-71 - INFO - project not present in https://ineuron.ai/course/Youtube-Mastery-Course-in-Hindi-Tech-Neuron
+2023-03-09 01:31:11,393 - scrappermaster.py | autoscrapping | lineno-71 - INFO -  course link :: https://ineuron.ai/course/Complete-Excel-Course
+2023-03-09 01:31:21,395 - scrappermaster.py | autoscrapping | lineno-71 - INFO - project not present in https://ineuron.ai/course/Complete-Excel-Course
+2023-03-09 01:31:22,092 - scrappermaster.py | autoscrapping | lineno-71 - INFO -  course link :: https://ineuron.ai/course/Job-Guaranteed-Big-Data-Bootcamp
+2023-03-09 01:31:33,510 - scrappermaster.py | autoscrapping | lineno-71 - INFO -  course link :: https://ineuron.ai/course/C-Sharp-Programming
+2023-03-09 01:31:43,022 - scrappermaster.py | autoscrapping | lineno-71 - INFO - project not present in https://ineuron.ai/course/C-Sharp-Programming
+2023-03-09 01:31:43,842 - scrappermaster.py | autoscrapping | lineno-71 - INFO -  course link :: https://ineuron.ai/course/Stripe-with-React-and-Node-Crash-Course
+2023-03-09 01:31:53,413 - scrappermaster.py | autoscrapping | lineno-71 - INFO - project not present in https://ineuron.ai/course/Stripe-with-React-and-Node-Crash-Course
+2023-03-09 01:31:54,241 - scrappermaster.py | autoscrapping | lineno-71 - INFO -  course link :: https://ineuron.ai/course/Golang
+2023-03-09 01:32:03,589 - scrappermaster.py | autoscrapping | lineno-71 - INFO - project not present in https://ineuron.ai/course/Golang
+2023-03-09 01:32:04,328 - scrappermaster.py | autoscrapping | lineno-71 - INFO -  course link :: https://ineuron.ai/course/Sign-Language-Detection
+2023-03-09 01:32:14,743 - scrappermaster.py | autoscrapping | lineno-71 - INFO - project not present in https://ineuron.ai/course/Sign-Language-Detection
+2023-03-09 01:32:15,520 - scrappermaster.py | autoscrapping | lineno-71 - INFO -  course link :: https://ineuron.ai/course/Automatic-Number-Plate-Recognition
+2023-03-09 01:32:25,691 - scrappermaster.py | autoscrapping | lineno-71 - INFO - project not present in https://ineuron.ai/course/Automatic-Number-Plate-Recognition
+2023-03-10 02:12:22,457 - application.py | homepage | lineno-16 - INFO - home_page hit by machine:127.0.0.1
+2023-03-10 02:12:30,311 - application.py | homepage | lineno-16 - INFO - home_page hit by machine:127.0.0.1
+2023-03-10 02:12:30,311 - application.py | homepage | lineno-16 - INFO - home_page hit by machine:127.0.0.1
+2023-03-10 02:14:01,019 - application.py | homepage | lineno-16 - INFO - home_page hit by machine:127.0.0.1
+2023-03-10 02:18:12,056 - application.py | homepage | lineno-16 - INFO - home_page hit by machine:127.0.0.1
+2023-03-10 02:19:16,050 - application.py | homepage | lineno-16 - INFO - home_page hit by machine:127.0.0.1
+2023-03-10 02:22:49,363 - application.py | homepage | lineno-16 - INFO - home_page hit by machine:127.0.0.1

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web Page Title</title>
+
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 70vh;
+		}
+		h1 {
+			font-size: 36px;
+			margin-bottom: 5px;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            border: 2px solid rgb(86, 224, 1);
+            border-radius: 5px;
+            padding: 10px;
+		}
+        h2 {
+			font-size: 20px;
+			margin-bottom: 20px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+            
+		}
+        h3 {
+			font-size: 15px;
+            margin-top: 20px;
+			margin-bottom: 5px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+            color: rgb(72, 72, 72);
+		}
+		label {
+			font-size: 24px;
+			margin-right: 10px;
+		}
+		input[type="text"] {
+			font-size: 24px;
+			padding: 10px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			margin-right: 10px;
+		}
+		input[type="submit"] {
+			font-size: 24px;
+			padding: 10px 20px;
+			border-radius: 5px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+    
+	<h1>iNeuron courses scrapping project</h1>
+    <h2>Clcik the button below to fetch all the courses details from mongoDb.</h2>
+
+    <div class="form">
+
+	<form action="/course_list" method="GET">
+		
+		<!--<input type="text" id="input" name="input">-->
+		<!--<button type="submit" id="button">Submit</button>-->
+        <input type="submit"  value="Press here">
+	</form>
+    </div>
+    <h3>Note : Data present in mongoDb can be old as it was scrapped from the last deployment of scrapping application.<br>
+    Please run the scrapper again so that it could fetch the latest data if needed or contact developer : saifali199511@gmail.com
+    </h3>
+
+</body>
+</html>
