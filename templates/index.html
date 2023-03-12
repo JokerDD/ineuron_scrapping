@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web Page Title</title>
+
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 80vh;
+		}
+		h1 {
+			font-size: 36px;
+			margin-bottom: 5px;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            border: 2px solid rgb(86, 224, 1);
+            border-radius: 5px;
+            padding: 10px;
+		}
+        h2 {
+			font-size: 20px;
+			margin-bottom: 20px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+            
+		}
+        h3 {
+			font-size: 15px;
+            margin-top: 20px;
+			margin-bottom: 5px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+            color: rgb(72, 72, 72);
+		}
+        h4 {
+			font-size: 20px;
+			margin-bottom: 20px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+            
+		}
+        h5 {
+			font-size: 20px;
+			margin-bottom: 2px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border: 2px solid rgb(255, 84, 49);
+            border-radius: 5px;
+            padding: 10px;
+            text-align: left;
+		}
+		label {
+			font-size: 24px;
+			margin-right: 10px;
+		}
+		input[type="number"] {
+			font-size: 24px;
+			padding: 10px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			margin-right: 10px;
+            width: 290px;
+            
+		}
+		input[type="submit"] {
+			font-size: 24px;
+			padding: 10px 20px;
+			border-radius: 5px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+        ::placeholder {
+            color :rgba(72, 72, 72, 0.671);
+            opacity: 0.4;
+        }
+        
+	</style>
+</head>
+<body>
+    
+	<h1>iNeuron courses scrapping project</h1>
+    <h2>Click the button below to fetch all the courses details from mongoDb.</h2>
+
+    <div class="form">
+
+	<form action="/course_list" method="GET">
+		
+		<!--<input type="text" id="input" name="input">-->
+		<!--<button type="submit" id="button">Submit</button>-->
+        <input type="submit"  value="Press here">
+	</form>
+    </div>
+    <h3>Note : Data present in mongoDb can be old as it was scrapped from the last deployment of scrapping application.<br>
+    Please run the scrapper again so that it could fetch the latest data if needed or contact developer : saifali199511@gmail.com
+    </h3>
+    <h5>
+        Advance options below
+    </h5>
+    <h4>
+        Enter the number of courses to be scrapped and click on "Start Scrapping" to start the scrapping:
+    </h4>
+    <div class="form">
+
+        <form action="/appstart" method="POST">
+            
+            <!--<input type="text" id="input" name="input">-->
+            <input type="number" name="course_count"  id="course_count" placeholder="Enter number of courses" min="0" max="800">
+            <input type="submit"  value="Start Scrapping" >
+        </form>
+        </div>
+        <h3>Note : Scrapping could take some time to finsih depending upon the number of courses, Hang tight!!<br>
+            For more information contact developer : saifali199511@gmail.com
+        </h3>
+
+</body>
+</html>

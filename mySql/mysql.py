@@ -65,6 +65,20 @@ class mysqlOpeartions:
         '''
         pass
 
+    def dropTables(self,table_name):
+         '''
+        desc : This method shall be used to truncate the tables in mysql database
+        return : boolean (True or False)
+        Written By: Saif Ali
+        Version: 1
+        Revision: None
+        '''
+         try:
+            self.mycursor.execute(f"truncate table ineuron_course.{table_name};")
+         except Exception as e:
+             self.logger.custlogger().info(f"truncation of table {table_name} failed with :: {e} ")
+    
+
     def createTables(self,schema_name):
 
         '''
@@ -85,9 +99,14 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            self.logger.custlogger().info(f"error at table all_course creation with :: {e} ")
-            print('table already exists')
             
+            try:
+                self.dropTables("all_course")
+                print('table already exists')
+                
+            except Exception as e1:
+                self.logger.custlogger().info(f"error at table all_course truncation with :: {e1} ")
+
         try:
             self.mycursor.execute(f"""
             create table {schema_name}.all_features (
@@ -96,8 +115,12 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            self.logger.custlogger().info(f"error at table all_features creation with :: {e} ")
-            print('table already exists')
+            try:
+                self.dropTables("all_features")
+                print('table already exists')
+                
+            except Exception as e1:
+                self.logger.custlogger().info(f"error at table all_features truncation with :: {e1} ")
         
         try:
             self.mycursor.execute(f"""
@@ -107,8 +130,12 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            self.logger.custlogger().info(f"error at table all_what_you_will_learn creation with :: {e} ")
-            print('table already exists')
+            try:
+                self.dropTables("all_what_you_will_learn")
+                print('table already exists')
+                
+            except Exception as e1:
+                self.logger.custlogger().info(f"error at table all_what_you_will_learn truncation with :: {e1} ")
         
         try:
             self.mycursor.execute(f"""
@@ -118,8 +145,12 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            self.logger.custlogger().info(f"error at table all_requirenments creation with :: {e} ")
-            print('table already exists')
+            try:
+                self.dropTables("all_requirenments")
+                print('table already exists')
+                
+            except Exception as e1:
+                self.logger.custlogger().info(f"error at table all_requirenments truncation with :: {e1} ")
         
         try:
             self.mycursor.execute(f"""
@@ -130,8 +161,12 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            self.logger.custlogger().info(f"error at table all_curriculum creation with :: {e} ")
-            print('table already exists')
+            try:
+                self.dropTables("all_curriculum")
+                print('table already exists')
+                
+            except Exception as e1:
+                self.logger.custlogger().info(f"error at table all_curriculum truncation with :: {e1} ")
         
         try:
             self.mycursor.execute(f"""
@@ -142,8 +177,12 @@ class mysqlOpeartions:
             );
             """)
         except Exception as e:
-            self.logger.custlogger().info(f"error at table all_projects creation with :: {e} ")
-            print('table already exists')
+            try:
+                self.dropTables("all_projects")
+                print('table already exists')
+                
+            except Exception as e1:
+                self.logger.custlogger().info(f"error at table all_projects truncation with :: {e1} ")
         
         try:
             self.mycursor.execute(f"""
@@ -155,8 +194,12 @@ class mysqlOpeartions:
             """)
             
         except Exception as e:
-            self.logger.custlogger().info(f"error at table all_instructors creation with :: {e} ")
-            print('table already exists')
+            try:
+                self.dropTables("all_instructors")
+                print('table already exists')
+                
+            except Exception as e1:
+                self.logger.custlogger().info(f"error at table all_instructors truncation with :: {e1} ")
         
         return True
     
@@ -261,6 +304,7 @@ class mysqlOpeartions:
                     
                 self.mycursor.executemany(sql_1,curr_value)
         except Exception as e:
+            
             try:
                 for key, values in dictionary.items():
                     key=key.strip()
@@ -273,14 +317,18 @@ class mysqlOpeartions:
                             i=i.strip()
                             
                             i_temp=i
-                            self.mycursor.execute(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key}","{i}")""")
-                            del i_temp
+                            try:
+                                self.mycursor.execute(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key}","{i}")""")
+                                del i_temp
+                            except Exception as a1:
+                                self.mycursor.execute(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key}",'{i}')""")
+                                continue
                         del key_temp
                         
 
             except Exception as e1:
                 self.logger.custlogger().critical(f' insert failed for curriculum with error :: {e1}')
-                self.logger.custlogger().critical(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key_temp}","{i_temp}")""")
+                self.logger.custlogger().critical(f"""insert into ineuron_course.all_curriculum values ("{course_link}","{key_temp}",{i_temp}")""")
                 
                 return False
         return True
@@ -345,9 +393,10 @@ class mysqlOpeartions:
             if commit_1==commit_2==commit_3==commit_4==True:
                 self.mydb.commit()
             else:
-                self.mydb.commit()
-                #self.mydb.rollback()
-                self.logger.custlogger().critical(f"rollback is triggered, please check logs for the mysql errors")
+                self.logger.custlogger().critical(f"rollback is triggered for {course_link}, please check logs for the mysql errors")
+                #self.mydb.commit()
+                self.mydb.rollback()
+                
             
         except Exception as e:
             self.logger.custlogger().critical(f"error in master sql method with :: {e} ")

@@ -1,5 +1,6 @@
 import os
 from selenium import webdriver
+import datetime
 from ineuron_scrapping.pagescrapping import scrappingOperations
 from mongoDb.mongodb import mongodbOperations
 from mySql.mysql import mysqlOpeartions
@@ -26,25 +27,55 @@ class autoScrapper:
         #self.driver_path=os.environ.get("CHROMEDRIVER_PATH")
         # self.driver_path = './chromedriver'
         self.dbName = 'i_nearon_scrapping'
-        self.collectionName = 'course_data'
+        self.collectionName = self.mongo_collect_name()
         self.dbOps = mongodbOperations(username='saif_1', password='saif_1')
         self.dbsql= mysqlOpeartions(username="root",password="Shakil@321",host="localhost")
-        self.pdfobj = createPdfoperations(username="saif_1",password="saif_1",dbName="i_nearon_scrapping",collectionName="course_data",singlefile=True)
+        self.pdfobj = createPdfoperations(username="saif_1",password="saif_1",dbName=self.dbName,collectionName=self.collectionName,singlefile=True)
         self.logger=custLogger("INFO")
-        
+
+
+    def mongo_collect_name(self):
+        try:
+            collectionName = datetime.datetime.now().strftime("collect_%d_%h_%Y_%I_%M_%S_%p")
+            return collectionName
+
+        except Exception as e:
+            self.logger.custlogger().info(f"db intiatisation dailed with error :: {e}")
+            return False
+    def mongo_db_name_add(self, collname):
+        """
+        This method will create or check coll_data collection in mongo db, coll_data collection will store the primary collections details
+        """
+        try:
+            collection_name="coll_data"
+            if self.dbOps.isCollectionPresent(dbName=self.dbName, collectionName=collection_name):
+                coll_name_data={'collection_name_iNeauron' : collname}
+                self.dbOps.insertOneData(dbName=self.dbName,collectionName=collection_name,data=coll_name_data)
+                self.dbOps.updatePrimaryColl(dbName=self.dbName,primary_coll_name=self.collectionName,status_data="in_progress")
+            else:
+                self.dbOps.createCollection(dbName=self.dbName, collectionName=collection_name)
+                coll_name_data={'collection_name_iNeauron' : collname}
+                self.dbOps.insertOneData(dbName=self.dbName,collectionName=collection_name,data=coll_name_data)
+                self.dbOps.updatePrimaryColl(dbName=self.dbName,primary_coll_name=self.collectionName,status_data="in_progress")
+        except Exception as e:
+            self.logger.custlogger().error(f"failed to save the name of the primary collection with error :: {e}")
 
     def mongo_connection_check(self):
-        if self.dbOps.isCollectionPresent(dbName=self.dbName, collectionName=self.collectionName):
-            return True
-        else:
-            try:
-                self.dbOps.createCollection(dbName=self.dbName, collectionName=self.collectionName)
-                self.logger.custlogger().info("collection created in mongo db")
-                
+        if self.collectionName is not False:
+            if self.dbOps.isCollectionPresent(dbName=self.dbName, collectionName=self.collectionName):
                 return True
-            except Exception as e:
-                self.logger.custlogger().error(f"failed with an error :: {e} :: at creating collection on mongo db")
-                return False
+            else:
+                try:
+                    self.dbOps.createCollection(dbName=self.dbName, collectionName=self.collectionName)
+                    self.logger.custlogger().info("collection created in mongo db")
+                    self.mongo_db_name_add(self.collectionName)
+                    
+                    return True
+                except Exception as e:
+                    self.logger.custlogger().error(f"failed with an error :: {e} :: at creating collection on mongo db")
+                    return False
+        else:
+            return False
             
     def mysql_connection_check(self):
         if self.dbsql.createCursor():
@@ -52,27 +83,49 @@ class autoScrapper:
         else:
             self.logger.custlogger().info("failed creating cursor for the mysql db")
             return False
-            
-
-    def autoscrapping(self):
+    
+    def appstart(self,course_count):
         self.logger.custlogger().info("Application start##############################################")
-        print("program is inside autoscrapping for loop") #debug
-        if self.mongo_connection_check() and self.mysql_connection_check():
-            scrapper = scrappingOperations(chrome_options=self.chrome_options) # initialization of scrapping
-            source_link="https://ineuron.ai/courses"
-            all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=120)
+        print(f"{course_count} courses will be scrapped") #debug
+        collection_count=self.dbOps.getDocCount(self.dbName,self.collectionName)
+        if isinstance(collection_count,int):
+            if collection_count > 5:
+                try:
+                    oldest_coll=self.dbOps.getCollectionName_oldest(self.dbName)
+                    self.dbOps.deleteCollection(self.dbName,oldest_coll)
+                    self.logger.custlogger().error(f"collection {oldest_coll} deleted successfully")
+                except Exception as e:
+                    self.logger.custlogger().error(f"collection {oldest_coll} deletion failed, current count of primary collection are : {collection_count}")
+            else:
+                self.logger.custlogger().error(f"primary collection less than 5")
 
+        if self.mongo_connection_check() and self.mysql_connection_check():
             try:
                 self.dbsql.createTables(schema_name="ineuron_course")
+                self.autoscrapping(course_count)
             except Exception as e:
-                self.logger.custlogger().error("failed creating tables in mySQL")
-            counter=0
-            #for course_link in all_course_link_list:
+                self.logger.custlogger().error(f"failed with error :: {e}")
+
+            
+        else:
+            print("check connections please")
+
+    def autoscrapping(self,course_count):
+        
+        scrapper = scrappingOperations(chrome_options=self.chrome_options) # initialization of scrapping
+        source_link="https://ineuron.ai/courses"
+        all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=120)
+
+        counter=0
+        #for course_link in all_course_link_list:
+        print(course_count,len(all_course_link_list))
+        self.logger.custlogger().info(f"cournt from user {course_count} and total links {len(all_course_link_list)}")
+        if course_count <= len(all_course_link_list):
             logger_instance=self.logger.custlogger()
-            for i in range(0,50):  #for testing a batch
+            for i in range(0,course_count):  #for testing a batch
 
                 course_link = all_course_link_list[i]  # for testing 
-                logger_instance.info(f" course link :: {course_link}")
+                logger_instance.info(f" course link -----------------------> {course_link}")
                 course_code_bs=scrapper.get_course_code(course_link)
                 course_data_dict=scrapper.basic_course_data(course_code_bs)
                 curr_project_code=scrapper.curr_and_proj(course_code_bs)
@@ -97,7 +150,7 @@ class autoScrapper:
                     logger_instance.info(f"project not present in {course_link}")
                 
                 try:
-                    self.dbOps.insertOneData(dbName="i_nearon_scrapping",collectionName="course_data",data=course_data_dict)
+                    self.dbOps.insertOneData(dbName=self.dbName,collectionName=self.collectionName,data=course_data_dict)
                 except Exception as e:
                     logger_instance.info(f"error at mongo db insert with :: {e}")
 
@@ -114,13 +167,15 @@ class autoScrapper:
             except Exception as e:
                 self.logger.custlogger().info(f"error at create pdf with :: {e}")
             print("all completed")
+            #dbName,primary_coll_name,status_data,
+            self.dbOps.updatePrimaryColl(dbName=self.dbName,primary_coll_name=self.collectionName,status_data="completed")
             print(counter)
-
+            return True
         else:
-            print("check connections please")
+            self.logger.custlogger().info("count too high")
+            return False
+
                        
-        
-        
     def autoscrapping_one(self):
         self.logger.custlogger().info("Application start##############################################")
         
@@ -139,7 +194,7 @@ class autoScrapper:
             #INDEX_TEST=all_course_link_list.index('https://ineuron.ai/course/Data-Science-Masters')
 
             #course_link=all_course_link_list[INDEX_TEST] # manually entering which course to scrap
-            course_link="https://ineuron.ai/course/Full-Stack-Data-Science-Feb'21-Batch"           
+            course_link="https://ineuron.ai/course/Data-Science-Masters"           
 
             course_code_bs=scrapper.get_course_code(course_link)
             course_data_dict=scrapper.basic_course_data(course_code_bs)
@@ -181,13 +236,16 @@ class autoScrapper:
             print("all completed")
         else:
             print("connections could not established")
-                     
-        
+
 
 if __name__ == "__main__":
-    
+
     scrap_test= autoScrapper()
-    scrap_test.autoscrapping()
+    scrap_test.autoscrapping_one()
+    
+    #appstart(400)
+    #autoscrapping_one
+    #autoscrapping
     
 
 

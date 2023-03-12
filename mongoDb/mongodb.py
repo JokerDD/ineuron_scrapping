@@ -189,6 +189,63 @@ class mongodbOperations:
             
             self.logger.custlogger().info(f"error at importing all data at once with :: {e} ")
 
+    def deleteCollection(self,dbName,collectionName):
+
+        try:
+            if self.isCollectionPresent(dbName, collectionName):
+                collection=self.getCollection(dbName,collectionName)
+                collection.drop()
+        except Exception as e:
+            self.logger.custlogger().error(f"error at deleting collection in mongo db :: {e} ")
+
+    def getCollectionName_latest(self,dbName,collectionName="coll_data"):
+
+        try:
+            if self.isCollectionPresent(dbName, collectionName):
+                collection=self.getCollection(dbName,collectionName)
+                data= collection.find_one(sort=[('$natural', pymongo.DESCENDING)])
+                last_primary_coll_name=data['collection_name_iNeauron']
+                return last_primary_coll_name
+        except Exception as e:
+            
+            self.logger.custlogger().info(f"error at importing the primary collection name with :: {e} ")
+    
+    def getCollectionName_oldest(self,dbName,collectionName="coll_data"):
+
+        try:
+            if self.isCollectionPresent(dbName, collectionName):
+                collection=self.getCollection(dbName,collectionName)
+                oldest_doc = collection.find().sort([("_id", pymongo.ASCENDING)]).limit(1)[0]
+                last_primary_coll_name=oldest_doc['collection_name_iNeauron']
+                return last_primary_coll_name
+        except Exception as e:
+            
+            self.logger.custlogger().info(f"error at importing the oldest collection name with :: {e} ")
+    
+    def updatePrimaryColl(self,dbName,primary_coll_name,status_data,collectionName="coll_data"):
+        try:
+            filter = {"collection_name_iNeauron":primary_coll_name}
+            update= {"$set": {"status": status_data}}
+            collection = self.getCollection(dbName, collectionName)
+            collection.update_one(filter, update)
+            
+        except Exception as e:
+            self.logger.custlogger().info(f"error at insertion with :: {e} ")
+
+    def getDocCount(self,dbName,collectionName="coll_data"):
+
+        try:
+            if self.isCollectionPresent(dbName, collectionName):
+                collection=self.getCollection(dbName,collectionName)
+                count_doc= collection.count_documents({})
+                return count_doc
+        except Exception as e:
+            self.logger.custlogger().info(f"error at doc count with :: {e} ")
+
+
+    
+        
+
 
 
 
