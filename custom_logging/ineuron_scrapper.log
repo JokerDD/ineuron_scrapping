@@ -3087,3 +3087,19 @@
 2023-03-12 18:42:46,724 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
 2023-03-12 18:42:46,724 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
 2023-03-12 18:42:46,724 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
+2023-03-12 21:14:06,958 - application.py | homepage | lineno-18 - INFO - web app start###############################################
+2023-03-12 21:14:06,964 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
+2023-03-12 21:14:19,639 - scrappermaster.py | appstart | lineno-88 - INFO - Application start##############################################
+2023-03-12 21:14:23,615 - scrappermaster.py | mongo_connection_check | lineno-70 - INFO - collection created in mongo db
+2023-03-12 21:14:27,354 - application.py | app_start | lineno-52 - ERROR - error at app start with :: 'autoScrapper' object has no attribute 'dbsql'
+2023-03-12 21:16:16,388 - application.py | homepage | lineno-18 - INFO - web app start###############################################
+2023-03-12 21:16:16,388 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
+2023-03-12 21:16:20,286 - scrappermaster.py | appstart | lineno-88 - INFO - Application start##############################################
+2023-03-12 21:16:24,340 - scrappermaster.py | mongo_connection_check | lineno-70 - INFO - collection created in mongo db
+2023-03-12 21:18:36,805 - scrappermaster.py | autoscrapping | lineno-122 - INFO - cournt from user 3 and total links 448
+2023-03-12 21:18:36,810 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/Advance-Excel
+2023-03-12 21:18:46,656 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/Advance-Excel
+2023-03-12 21:18:47,883 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/Alteryx
+2023-03-12 21:18:57,013 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/Alteryx
+2023-03-12 21:18:57,953 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/Tableau-Projects
+2023-03-12 21:19:07,631 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/Tableau-Projects

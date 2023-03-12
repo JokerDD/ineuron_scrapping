@@ -3,7 +3,7 @@ from selenium import webdriver
 import datetime
 from ineuron_scrapping.pagescrapping import scrappingOperations
 from mongoDb.mongodb import mongodbOperations
-from mySql.mysql import mysqlOpeartions
+#from mySql.mysql import mysqlOpeartions
 from createpdf import createPdfoperations
 from custom_logging.customLogger import custLogger
 
@@ -29,7 +29,7 @@ class autoScrapper:
         self.dbName = 'i_nearon_scrapping'
         self.collectionName = self.mongo_collect_name()
         self.dbOps = mongodbOperations(username='saif_1', password='saif_1')
-        self.dbsql= mysqlOpeartions(username="root",password="Shakil@321",host="localhost")
+        #self.dbsql= mysqlOpeartions(username="root",password="Shakil@321",host="localhost")
         self.pdfobj = createPdfoperations(username="saif_1",password="saif_1",dbName=self.dbName,collectionName=self.collectionName,singlefile=True)
         self.logger=custLogger("INFO")
 
@@ -99,9 +99,9 @@ class autoScrapper:
             else:
                 self.logger.custlogger().error(f"primary collection less than 5")
 
-        if self.mongo_connection_check() and self.mysql_connection_check():
+        if self.mongo_connection_check():# and self.mysql_connection_check():
             try:
-                self.dbsql.createTables(schema_name="ineuron_course")
+                #self.dbsql.createTables(schema_name="ineuron_course")
                 self.autoscrapping(course_count)
             except Exception as e:
                 self.logger.custlogger().error(f"failed with error :: {e}")
@@ -155,7 +155,8 @@ class autoScrapper:
                     logger_instance.info(f"error at mongo db insert with :: {e}")
 
                 try:
-                    self.dbsql.masterInsertSql(course_link=course_link,course_data_dict=course_data_dict,project_track=project_track,curr_track=curr_track)
+                    pass
+                    #self.dbsql.masterInsertSql(course_link=course_link,course_data_dict=course_data_dict,project_track=project_track,curr_track=curr_track)
                 except Exception as e:
                     logger_instance.info(f"error at mysql db insert with :: {e}")
 
