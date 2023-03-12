@@ -3056,3 +3056,34 @@
 2023-03-12 01:14:37,149 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/Tableau-Course
 2023-03-12 01:14:37,885 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/Youtube-Mastery-Course-in-Hindi-Tech-Neuron
 2023-03-12 01:14:47,411 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/Youtube-Mastery-Course-in-Hindi-Tech-Neuron
+2023-03-12 01:26:28,648 - application.py | homepage | lineno-18 - INFO - web app start###############################################
+2023-03-12 01:26:28,673 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
+2023-03-12 01:27:34,864 - scrappermaster.py | appstart | lineno-88 - INFO - Application start##############################################
+2023-03-12 01:27:37,641 - scrappermaster.py | mongo_connection_check | lineno-70 - INFO - collection created in mongo db
+2023-03-12 01:29:48,662 - scrappermaster.py | autoscrapping | lineno-122 - INFO - cournt from user 7 and total links 448
+2023-03-12 01:29:48,668 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/Class-10-Physics
+2023-03-12 01:29:57,539 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/Class-10-Physics
+2023-03-12 01:29:58,405 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/Video-editing-with-Adobe-Premiere-Pro
+2023-03-12 01:30:08,720 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/Video-editing-with-Adobe-Premiere-Pro
+2023-03-12 01:30:09,454 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/VueJS-Crash-Course
+2023-03-12 01:30:18,664 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/VueJS-Crash-Course
+2023-03-12 01:30:19,332 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/Trifacta
+2023-03-12 01:30:28,673 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/Trifacta
+2023-03-12 01:30:29,315 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/Pro-Backend-Developer
+2023-03-12 01:30:38,812 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/Pro-Backend-Developer
+2023-03-12 01:30:39,482 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/DSA-with-Python
+2023-03-12 01:30:50,331 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/DSA-with-Python
+2023-03-12 01:30:51,988 - scrappermaster.py | autoscrapping | lineno-124 - INFO -  course link -----------------------> https://ineuron.ai/course/Email-Marketing
+2023-03-12 01:31:01,566 - scrappermaster.py | autoscrapping | lineno-124 - INFO - project not present in https://ineuron.ai/course/Email-Marketing
+2023-03-12 12:13:45,109 - application.py | homepage | lineno-18 - INFO - web app start###############################################
+2023-03-12 12:13:45,115 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
+2023-03-12 12:14:31,783 - application.py | homepage | lineno-18 - INFO - web app start###############################################
+2023-03-12 12:14:31,783 - application.py | homepage | lineno-18 - INFO - web app start###############################################
+2023-03-12 12:14:31,788 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
+2023-03-12 12:14:31,788 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
+2023-03-12 18:42:46,716 - application.py | homepage | lineno-18 - INFO - web app start###############################################
+2023-03-12 18:42:46,716 - application.py | homepage | lineno-18 - INFO - web app start###############################################
+2023-03-12 18:42:46,716 - application.py | homepage | lineno-18 - INFO - web app start###############################################
+2023-03-12 18:42:46,724 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
+2023-03-12 18:42:46,724 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
+2023-03-12 18:42:46,724 - application.py | homepage | lineno-19 - INFO - home_page hit by machine:127.0.0.1
