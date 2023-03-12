@@ -87,7 +87,7 @@ class autoScrapper:
     def appstart(self,course_count):
         self.logger.custlogger().info("Application start##############################################")
         print(f"{course_count} courses will be scrapped") #debug
-        collection_count=self.dbOps.getDocCount(self.dbName,self.collectionName)
+        collection_count=self.dbOps.getDocCount(self.dbName,"coll_data")
         if isinstance(collection_count,int):
             if collection_count > 5:
                 try:
@@ -97,7 +97,9 @@ class autoScrapper:
                 except Exception as e:
                     self.logger.custlogger().error(f"collection {oldest_coll} deletion failed, current count of primary collection are : {collection_count}")
             else:
-                self.logger.custlogger().error(f"primary collection less than 5")
+                self.logger.custlogger().info(f"primary collection less than 5")
+        else:
+            self.logger.custlogger().info(f"no data in coll_data collection")
 
         if self.mongo_connection_check():# and self.mysql_connection_check():
             try:
