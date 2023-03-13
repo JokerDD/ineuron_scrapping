@@ -121,7 +121,7 @@ class autoScrapper:
         counter=0
         #for course_link in all_course_link_list:
         print(course_count,len(all_course_link_list))
-        self.logger.custlogger().info(f"cournt from user {course_count} and total links {len(all_course_link_list)}")
+        self.logger.custlogger().info(f"count from user {course_count} and total links {len(all_course_link_list)}")
         if course_count <= len(all_course_link_list):
             logger_instance=self.logger.custlogger()
             for i in range(0,course_count):  #for testing a batch

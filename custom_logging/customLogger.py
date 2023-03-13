@@ -11,10 +11,10 @@ class S3Handler(logging.Handler):
         self.folder_path = folder_path
         self.log_file_name = file_name
         self.s3 = boto3.client(service_name='s3',
-                    region_name='eu-north-1')
-                    #aws_access_key_id='value',
-                    #aws_secret_access_key='value'
-                    
+                    region_name='eu-north-1',
+                    aws_access_key_id='AKIAS7QUN5WYHQHFP7OR',
+                    aws_secret_access_key='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'
+                    )
 
     def emit(self, record):
         existing_data = ''
