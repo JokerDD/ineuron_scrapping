@@ -1,0 +1,533 @@
+2023/03/13 22:39:13.323711 [INFO] Starting...
+2023/03/13 22:39:13.323760 [INFO] Starting EBPlatform-PlatformEngine
+2023/03/13 22:39:13.323832 [INFO] reading event message file
+2023/03/13 22:39:13.324041 [INFO] Engine received EB command userdata-exec
+
+2023/03/13 22:39:14.083804 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBAutoScalingGroup --region eu-north-1
+2023/03/13 22:39:14.369310 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBBeanstalkMetadata --region eu-north-1
+2023/03/13 22:39:14.680090 [INFO] This is a workflow controlled instance.
+2023/03/13 22:39:14.680191 [INFO] Engine command: (env-launch)
+
+2023/03/13 22:39:14.680704 [INFO] Executing instruction: SyncClock
+2023/03/13 22:39:14.680709 [INFO] Starting SyncClock
+2023/03/13 22:39:14.680719 [INFO] Running command /bin/sh -c /usr/bin/chronyc tracking
+2023/03/13 22:39:14.686703 [INFO] Reference ID    : A9FEA97B (169.254.169.123)
+Stratum         : 4
+Ref time (UTC)  : Mon Mar 13 22:39:15 2023
+System time     : 0.595040858 seconds slow of NTP time
+Last offset     : -0.603428721 seconds
+RMS offset      : 0.603428721 seconds
+Frequency       : 22.648 ppm slow
+Residual freq   : -18.648 ppm
+Skew            : 9.432 ppm
+Root delay      : 0.000266608 seconds
+Root dispersion : 0.000340446 seconds
+Update interval : 0.0 seconds
+Leap status     : Normal
+
+2023/03/13 22:39:14.686724 [INFO] Running command /bin/sh -c /usr/bin/chronyc -a makestep
+2023/03/13 22:39:15.284018 [INFO] 200 OK
+
+2023/03/13 22:39:15.284332 [INFO] Skipping Configure OS
+2023/03/13 22:39:15.284340 [INFO] Skipping LockRepo
+2023/03/13 22:39:15.284344 [INFO] Skipping GenerateEBBanner
+2023/03/13 22:39:15.284348 [INFO] Skipping Install Process Manager
+2023/03/13 22:39:15.284352 [INFO] Skipping install proxy
+2023/03/13 22:39:15.284356 [INFO] Skipping installhealthd
+2023/03/13 22:39:15.284360 [INFO] Skipping Install Log Streaming Manager
+2023/03/13 22:39:15.284364 [INFO] Skipping install X-Ray
+2023/03/13 22:39:15.284367 [INFO] Skipping install Third Party License
+2023/03/13 22:39:15.284371 [INFO] Skipping install httpd
+2023/03/13 22:39:15.284376 [INFO] Instance has NOT been bootstrapped
+2023/03/13 22:39:15.284379 [INFO] Executing instruction: installSqsd
+2023/03/13 22:39:15.284382 [INFO] This is a web server environment instance, skip install sqsd daemon ...
+2023/03/13 22:39:15.284385 [INFO] Instance has NOT been bootstrapped
+2023/03/13 22:39:15.284388 [INFO] Executing instruction: bootstraphealthd
+2023/03/13 22:39:15.284391 [INFO] this is an enhanced health env ...
+2023/03/13 22:39:15.284401 [INFO] bootstrap healthd....
+2023/03/13 22:39:15.284413 [INFO] Running command /bin/sh -c /usr/bin/id -u healthd || /usr/sbin/useradd --user-group healthd -s /sbin/nologin --create-home
+2023/03/13 22:39:15.313085 [INFO] /usr/bin/id: healthd: no such user
+
+2023/03/13 22:39:15.313646 [INFO] bootstrap healthd....
+2023/03/13 22:39:15.313665 [INFO] Running command /bin/sh -c /usr/bin/id -u healthd || /usr/sbin/useradd --user-group healthd -s /sbin/nologin --create-home
+2023/03/13 22:39:15.316125 [INFO] 1001
+
+2023/03/13 22:39:15.316311 [INFO] configure bundle log for healthd...
+2023/03/13 22:39:15.316349 [INFO] Executing instruction: GetSetupProxyLog
+2023/03/13 22:39:15.316404 [INFO] Skipping Install yum packages
+2023/03/13 22:39:15.316411 [INFO] Skipping Install Python Modules
+2023/03/13 22:39:15.316415 [INFO] Skipping MarkBaked
+2023/03/13 22:39:15.316419 [INFO] Instance has NOT been bootstrapped
+2023/03/13 22:39:15.316421 [INFO] Executing instruction: TuneSystemSettings
+2023/03/13 22:39:15.316423 [INFO] Starting TuneSystemSettings
+2023/03/13 22:39:15.316426 [INFO] Instance has NOT been bootstrapped
+2023/03/13 22:39:15.317229 [INFO] Executing instruction: GetSetupLogRotate
+2023/03/13 22:39:15.317233 [INFO] Initialize LogRotate files and directories
+2023/03/13 22:39:15.331132 [INFO] Instance has NOT been bootstrapped
+2023/03/13 22:39:15.331144 [INFO] Executing instruction: BootstrapCFNHup
+2023/03/13 22:39:15.331147 [INFO] Bootstrap cfn-hup
+2023/03/13 22:39:15.334542 [INFO] Copying file /opt/elasticbeanstalk/config/private/aws-eb-command-handler.conf to /etc/cfn/hooks.d/aws-eb-command-handler.conf
+2023/03/13 22:39:15.335789 [INFO] Executing instruction: StartCFNHup
+2023/03/13 22:39:15.335794 [INFO] Start cfn-hup
+2023/03/13 22:39:15.335810 [INFO] Running command /bin/sh -c systemctl show -p PartOf cfn-hup.service
+2023/03/13 22:39:15.341232 [INFO] cfn-hup is not registered with EB yet, registering it now
+2023/03/13 22:39:15.341261 [INFO] Running command /bin/sh -c systemctl show -p PartOf cfn-hup.service
+2023/03/13 22:39:15.347194 [INFO] Running command /bin/sh -c systemctl daemon-reload
+2023/03/13 22:39:15.397118 [INFO] Running command /bin/sh -c systemctl reset-failed
+2023/03/13 22:39:15.401029 [INFO] Running command /bin/sh -c systemctl is-enabled aws-eb.target
+2023/03/13 22:39:15.404696 [INFO] Running command /bin/sh -c systemctl enable aws-eb.target
+2023/03/13 22:39:15.453595 [INFO] Running command /bin/sh -c systemctl start aws-eb.target
+2023/03/13 22:39:15.457649 [INFO] Running command /bin/sh -c systemctl enable cfn-hup.service
+2023/03/13 22:39:15.505980 [INFO] Created symlink from /etc/systemd/system/multi-user.target.wants/cfn-hup.service to /etc/systemd/system/cfn-hup.service.
+
+2023/03/13 22:39:15.506016 [INFO] Running command /bin/sh -c systemctl is-active cfn-hup.service
+2023/03/13 22:39:15.511491 [INFO] cfn-hup process is not running, starting it now
+2023/03/13 22:39:15.511519 [INFO] Running command /bin/sh -c systemctl show -p PartOf cfn-hup.service
+2023/03/13 22:39:15.515347 [INFO] Running command /bin/sh -c systemctl is-active cfn-hup.service
+2023/03/13 22:39:15.518392 [INFO] Running command /bin/sh -c systemctl start cfn-hup.service
+2023/03/13 22:39:15.553587 [INFO] Instance has NOT been bootstrapped
+2023/03/13 22:39:15.553599 [INFO] Executing instruction: SetupPublishLogCronjob
+2023/03/13 22:39:15.553602 [INFO] Setup publish logs cron job...
+2023/03/13 22:39:15.553606 [INFO] Copying file /opt/elasticbeanstalk/config/private/logtasks/cron/publishlogs to /etc/cron.d/publishlogs
+2023/03/13 22:39:15.554978 [INFO] Instance has NOT been bootstrapped
+2023/03/13 22:39:15.554987 [INFO] Executing instruction: MarkBootstrapped
+2023/03/13 22:39:15.554990 [INFO] Starting MarkBootstrapped
+2023/03/13 22:39:15.555007 [INFO] Instance has NOT been bootstrapped
+2023/03/13 22:39:15.555071 [INFO] Marked instance as Bootstrapped
+2023/03/13 22:39:15.555075 [INFO] Executing instruction: Save CFN Stack Info
+2023/03/13 22:39:15.555109 [INFO] Starting SwitchCFNStack
+2023/03/13 22:39:15.555114 [INFO] Executing cleanup logic
+2023/03/13 22:39:15.555122 [INFO] Platform Engine finished execution on command: env-launch
+
+2023/03/13 22:41:00.389094 [INFO] Starting...
+2023/03/13 22:41:00.389137 [INFO] Starting EBPlatform-PlatformEngine
+2023/03/13 22:41:00.389152 [INFO] reading event message file
+2023/03/13 22:41:00.389298 [INFO] Engine received EB command cfn-hup-exec
+
+2023/03/13 22:41:00.437351 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBAutoScalingGroup --region eu-north-1
+2023/03/13 22:41:00.814614 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBBeanstalkMetadata --region eu-north-1
+2023/03/13 22:41:01.140518 [INFO] checking whether command app-deploy is applicable to this instance...
+2023/03/13 22:41:01.140528 [INFO] this command is applicable to the instance, thus instance should execute command
+2023/03/13 22:41:01.140531 [INFO] Engine command: (app-deploy)
+
+2023/03/13 22:41:01.140535 [INFO] Downloading EB Application...
+2023/03/13 22:41:01.140537 [INFO] Region: eu-north-1
+2023/03/13 22:41:01.140540 [INFO] envID: e-2xf2ng3rqm
+2023/03/13 22:41:01.140546 [INFO] envBucket: elasticbeanstalk-eu-north-1-205127544240
+2023/03/13 22:41:01.140548 [INFO] Using manifest file name from command request
+2023/03/13 22:41:01.140553 [INFO] Unable to get version manifest file.
+2023/03/13 22:41:01.140556 [INFO] Downloading latest manifest available.
+2023/03/13 22:41:01.140559 [INFO] Download latest app version manifest
+2023/03/13 22:41:01.140624 [INFO] resources/environments/e-2xf2ng3rqm/_runtime/versions/manifest
+2023/03/13 22:41:01.180294 [INFO] latestManifest key *: resources/environments/e-2xf2ng3rqm/_runtime/versions/manifest_1678747100415
+
+2023/03/13 22:41:01.180440 [INFO] Downloading: bucket: elasticbeanstalk-eu-north-1-205127544240, object: /resources/environments/e-2xf2ng3rqm/_runtime/versions/manifest_1678747100415
+2023/03/13 22:41:01.195090 [INFO] Download successful146bytes downloaded
+2023/03/13 22:41:01.195169 [INFO] Trying to read and parse version manifest...
+2023/03/13 22:41:01.195231 [INFO] Downloading: bucket: elasticbeanstalk-eu-north-1-205127544240, object: /resources/environments/e-2xf2ng3rqm/_runtime/_versions/ineuron_scrap_project_2/Sample Application
+2023/03/13 22:41:01.207439 [INFO] Download successful2820bytes downloaded
+2023/03/13 22:41:01.207761 [INFO] Executing instruction: ElectLeader
+2023/03/13 22:41:01.207769 [INFO] Running leader election for instance i-06a2631b5a17bba36...
+2023/03/13 22:41:01.207772 [INFO] Calling the cfn-elect-cmd-leader to elect the command leader.
+2023/03/13 22:41:01.207784 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-elect-cmd-leader --stack arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c --command-name ElasticBeanstalkCommand-AWSEBAutoScalingGroup --invocation-id 6539b01c-6623-44b5-adb9-f98786cb3a9d --listener-id i-06a2631b5a17bba36 --region eu-north-1
+2023/03/13 22:41:01.883707 [INFO] Instance is Leader.
+2023/03/13 22:41:01.883749 [INFO] Executing instruction: stopSqsd
+2023/03/13 22:41:01.883755 [INFO] This is a web server environment instance, skip stop sqsd daemon ...
+2023/03/13 22:41:01.883757 [INFO] Executing instruction: PreBuildEbExtension
+2023/03/13 22:41:01.883760 [INFO] Starting executing the config set Infra-EmbeddedPreBuild.
+2023/03/13 22:41:01.883772 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-init -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBAutoScalingGroup --region eu-north-1 --configsets Infra-EmbeddedPreBuild
+2023/03/13 22:41:02.270335 [INFO] Finished executing the config set Infra-EmbeddedPreBuild.
+
+2023/03/13 22:41:02.270369 [INFO] Executing instruction: StageApplication
+2023/03/13 22:41:02.270456 [INFO] extracting /opt/elasticbeanstalk/deployment/app_source_bundle to /var/app/staging/
+2023/03/13 22:41:02.270468 [INFO] Running command /bin/sh -c /usr/bin/unzip -q -o /opt/elasticbeanstalk/deployment/app_source_bundle -d /var/app/staging/
+2023/03/13 22:41:02.273154 [INFO] finished extracting /opt/elasticbeanstalk/deployment/app_source_bundle to /var/app/staging/ successfully
+2023/03/13 22:41:02.273578 [INFO] Executing instruction: RunAppDeployPreBuildHooks
+2023/03/13 22:41:02.273615 [INFO] Executing platform hooks in .platform/hooks/prebuild/
+2023/03/13 22:41:02.273629 [INFO] The dir .platform/hooks/prebuild/ does not exist
+2023/03/13 22:41:02.273632 [INFO] Finished running scripts in /var/app/staging/.platform/hooks/prebuild
+2023/03/13 22:41:02.273636 [INFO] Executing instruction: InstallDependency
+2023/03/13 22:41:02.273640 [INFO] checking dependencies file
+2023/03/13 22:41:02.273650 [INFO] No dependency file found
+2023/03/13 22:41:02.273652 [INFO] Executing instruction: check Procfile
+2023/03/13 22:41:02.273662 [INFO] creating default Procfile...
+2023/03/13 22:41:02.273692 [INFO] Executing instruction: configure X-Ray
+2023/03/13 22:41:02.273695 [INFO] X-Ray is not enabled.
+2023/03/13 22:41:02.273698 [INFO] Executing instruction: configure proxy server
+2023/03/13 22:41:02.281515 [INFO] Executing instruction: configure healthd specific proxy conf
+2023/03/13 22:41:02.285411 [INFO] Running command /bin/sh -c systemctl show -p PartOf healthd.service
+2023/03/13 22:41:02.291961 [INFO] Running command /bin/sh -c systemctl daemon-reload
+2023/03/13 22:41:02.372094 [INFO] Running command /bin/sh -c systemctl reset-failed
+2023/03/13 22:41:02.375958 [INFO] Running command /bin/sh -c systemctl is-enabled aws-eb.target
+2023/03/13 22:41:02.379498 [INFO] Running command /bin/sh -c systemctl enable aws-eb.target
+2023/03/13 22:41:02.459347 [INFO] Running command /bin/sh -c systemctl start aws-eb.target
+2023/03/13 22:41:02.463191 [INFO] Running command /bin/sh -c systemctl enable healthd.service
+2023/03/13 22:41:02.539794 [INFO] Created symlink from /etc/systemd/system/multi-user.target.wants/healthd.service to /etc/systemd/system/healthd.service.
+
+2023/03/13 22:41:02.539851 [INFO] Running command /bin/sh -c systemctl show -p PartOf healthd.service
+2023/03/13 22:41:02.544155 [INFO] Running command /bin/sh -c systemctl is-active healthd.service
+2023/03/13 22:41:02.547338 [INFO] Running command /bin/sh -c systemctl start healthd.service
+2023/03/13 22:41:02.562769 [INFO] Copying file /opt/elasticbeanstalk/config/private/healthd/healthd_logformat.conf to /var/proxy/staging/nginx/conf.d/healthd_logformat.conf
+2023/03/13 22:41:02.563964 [INFO] Copying file /opt/elasticbeanstalk/config/private/healthd/healthd_nginx.conf to /var/proxy/staging/nginx/conf.d/elasticbeanstalk/healthd.conf
+2023/03/13 22:41:02.565086 [INFO] Executing instruction: configure log streaming
+2023/03/13 22:41:02.565094 [INFO] log streaming is not enabled
+2023/03/13 22:41:02.565097 [INFO] disable log stream
+2023/03/13 22:41:02.565110 [INFO] Running command /bin/sh -c systemctl show -p PartOf amazon-cloudwatch-agent.service
+2023/03/13 22:41:02.573124 [INFO] Running command /bin/sh -c systemctl stop amazon-cloudwatch-agent.service
+2023/03/13 22:41:02.578829 [INFO] Executing instruction: GetToggleForceRotate
+2023/03/13 22:41:02.578843 [INFO] Checking if logs need forced rotation
+2023/03/13 22:41:02.578871 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBAutoScalingGroup --region eu-north-1
+2023/03/13 22:41:03.018502 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBBeanstalkMetadata --region eu-north-1
+2023/03/13 22:41:03.475051 [INFO] Generating rsyslog config from Procfile
+2023/03/13 22:41:03.476149 [INFO] Running command /bin/sh -c systemctl restart rsyslog.service
+2023/03/13 22:41:03.507020 [INFO] Executing instruction: PostBuildEbExtension
+2023/03/13 22:41:03.507049 [INFO] Starting executing the config set Infra-EmbeddedPostBuild.
+2023/03/13 22:41:03.507069 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-init -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBAutoScalingGroup --region eu-north-1 --configsets Infra-EmbeddedPostBuild
+2023/03/13 22:41:03.844192 [INFO] Finished executing the config set Infra-EmbeddedPostBuild.
+
+2023/03/13 22:41:03.844212 [INFO] Executing instruction: CleanEbExtensions
+2023/03/13 22:41:03.844313 [INFO] Cleaned ebextensions subdirectories from app staging directory.
+2023/03/13 22:41:03.844317 [INFO] Executing instruction: RunAppDeployPreDeployHooks
+2023/03/13 22:41:03.844329 [INFO] Executing platform hooks in .platform/hooks/predeploy/
+2023/03/13 22:41:03.844344 [INFO] The dir .platform/hooks/predeploy/ does not exist
+2023/03/13 22:41:03.844347 [INFO] Finished running scripts in /var/app/staging/.platform/hooks/predeploy
+2023/03/13 22:41:03.844351 [INFO] Executing instruction: stop X-Ray
+2023/03/13 22:41:03.844355 [INFO] stop X-Ray ...
+2023/03/13 22:41:03.844364 [INFO] Running command /bin/sh -c systemctl show -p PartOf xray.service
+2023/03/13 22:41:03.849743 [WARN] stopProcess Warning: process xray is not registered 
+2023/03/13 22:41:03.849787 [INFO] Running command /bin/sh -c systemctl stop xray.service
+2023/03/13 22:41:03.856035 [INFO] Executing instruction: stop proxy
+2023/03/13 22:41:03.856054 [INFO] Running command /bin/sh -c systemctl show -p PartOf httpd.service
+2023/03/13 22:41:03.861286 [WARN] deregisterProcess Warning: process httpd is not registered, skipping...
+
+2023/03/13 22:41:03.861307 [INFO] Running command /bin/sh -c systemctl show -p PartOf nginx.service
+2023/03/13 22:41:03.866915 [WARN] deregisterProcess Warning: process nginx is not registered, skipping...
+
+2023/03/13 22:41:03.866930 [INFO] Executing instruction: FlipApplication
+2023/03/13 22:41:03.866933 [INFO] Fetching environment variables...
+2023/03/13 22:41:03.867005 [INFO] Purge old process...
+2023/03/13 22:41:03.867014 [INFO] Removing /var/app/current/ if it exists
+2023/03/13 22:41:03.867021 [INFO] Renaming /var/app/staging/ to /var/app/current/
+2023/03/13 22:41:03.867032 [INFO] Register application processes...
+2023/03/13 22:41:03.867035 [INFO] Registering the proc: web
+
+2023/03/13 22:41:03.867044 [INFO] Running command /bin/sh -c systemctl show -p PartOf web.service
+2023/03/13 22:41:03.871987 [INFO] Running command /bin/sh -c systemctl daemon-reload
+2023/03/13 22:41:03.946742 [INFO] Running command /bin/sh -c systemctl reset-failed
+2023/03/13 22:41:03.950304 [INFO] Running command /bin/sh -c systemctl is-enabled eb-app.target
+2023/03/13 22:41:03.953432 [INFO] Copying file /opt/elasticbeanstalk/config/private/aws-eb.target to /etc/systemd/system/eb-app.target
+2023/03/13 22:41:03.954493 [INFO] Running command /bin/sh -c systemctl enable eb-app.target
+2023/03/13 22:41:04.035110 [INFO] Created symlink from /etc/systemd/system/multi-user.target.wants/eb-app.target to /etc/systemd/system/eb-app.target.
+
+2023/03/13 22:41:04.035155 [INFO] Running command /bin/sh -c systemctl start eb-app.target
+2023/03/13 22:41:04.039399 [INFO] Running command /bin/sh -c systemctl enable web.service
+2023/03/13 22:41:04.118733 [INFO] Created symlink from /etc/systemd/system/multi-user.target.wants/web.service to /etc/systemd/system/web.service.
+
+2023/03/13 22:41:04.118760 [INFO] Running command /bin/sh -c systemctl show -p PartOf web.service
+2023/03/13 22:41:04.123189 [INFO] Running command /bin/sh -c systemctl is-active web.service
+2023/03/13 22:41:04.126355 [INFO] Running command /bin/sh -c systemctl start web.service
+2023/03/13 22:41:04.139421 [INFO] Executing instruction: start X-Ray
+2023/03/13 22:41:04.139441 [INFO] X-Ray is not enabled.
+2023/03/13 22:41:04.139446 [INFO] Executing instruction: start proxy with new configuration
+2023/03/13 22:41:04.139467 [INFO] Running command /bin/sh -c /usr/sbin/nginx -t -c /var/proxy/staging/nginx/nginx.conf
+2023/03/13 22:41:04.178596 [INFO] nginx: the configuration file /var/proxy/staging/nginx/nginx.conf syntax is ok
+nginx: configuration file /var/proxy/staging/nginx/nginx.conf test is successful
+
+2023/03/13 22:41:04.178676 [INFO] Running command /bin/sh -c cp -rp /var/proxy/staging/nginx/* /etc/nginx
+2023/03/13 22:41:04.183001 [INFO] Running command /bin/sh -c systemctl show -p PartOf nginx.service
+2023/03/13 22:41:04.191122 [INFO] Running command /bin/sh -c systemctl daemon-reload
+2023/03/13 22:41:04.277032 [INFO] Running command /bin/sh -c systemctl reset-failed
+2023/03/13 22:41:04.282913 [INFO] Running command /bin/sh -c systemctl show -p PartOf nginx.service
+2023/03/13 22:41:04.287950 [INFO] Running command /bin/sh -c systemctl is-active nginx.service
+2023/03/13 22:41:04.291553 [INFO] Running command /bin/sh -c systemctl start nginx.service
+2023/03/13 22:41:04.377262 [INFO] Executing instruction: configureSqsd
+2023/03/13 22:41:04.377285 [INFO] This is a web server environment instance, skip configure sqsd daemon ...
+2023/03/13 22:41:04.377289 [INFO] Executing instruction: startSqsd
+2023/03/13 22:41:04.377293 [INFO] This is a web server environment instance, skip start sqsd daemon ...
+2023/03/13 22:41:04.377296 [INFO] Executing instruction: Track pids in healthd
+2023/03/13 22:41:04.377301 [INFO] This is an enhanced health env...
+2023/03/13 22:41:04.377327 [INFO] Running command /bin/sh -c systemctl show -p ConsistsOf aws-eb.target | cut -d= -f2
+2023/03/13 22:41:04.386104 [INFO] cfn-hup.service nginx.service healthd.service
+
+2023/03/13 22:41:04.386126 [INFO] Running command /bin/sh -c systemctl show -p ConsistsOf eb-app.target | cut -d= -f2
+2023/03/13 22:41:04.392902 [INFO] web.service
+
+2023/03/13 22:41:04.392998 [INFO] Executing instruction: RunAppDeployPostDeployHooks
+2023/03/13 22:41:04.393008 [INFO] Executing platform hooks in .platform/hooks/postdeploy/
+2023/03/13 22:41:04.393020 [INFO] The dir .platform/hooks/postdeploy/ does not exist
+2023/03/13 22:41:04.393022 [INFO] Finished running scripts in /var/app/current/.platform/hooks/postdeploy
+2023/03/13 22:41:04.393026 [INFO] Executing cleanup logic
+2023/03/13 22:41:04.393102 [INFO] CommandService Response: {"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"Engine execution has succeeded.","returncode":0,"events":[{"msg":"Instance deployment successfully generated a 'Procfile'.","timestamp":1678747262273,"severity":"INFO"},{"msg":"Instance deployment completed successfully.","timestamp":1678747264393,"severity":"INFO"}]}]}
+
+2023/03/13 22:41:04.393233 [INFO] Platform Engine finished execution on command: app-deploy
+
+2023/03/13 22:42:53.790593 [INFO] Starting...
+2023/03/13 22:42:53.790651 [INFO] Starting EBPlatform-PlatformEngine
+2023/03/13 22:42:53.790667 [INFO] reading event message file
+2023/03/13 22:42:53.790790 [INFO] Engine received EB command cfn-hup-exec
+
+2023/03/13 22:42:53.840403 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBAutoScalingGroup --region eu-north-1
+2023/03/13 22:42:54.199279 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBBeanstalkMetadata --region eu-north-1
+2023/03/13 22:42:54.502453 [INFO] checking whether command app-deploy is applicable to this instance...
+2023/03/13 22:42:54.502464 [INFO] this command is applicable to the instance, thus instance should execute command
+2023/03/13 22:42:54.502467 [INFO] Engine command: (app-deploy)
+
+2023/03/13 22:42:54.502471 [INFO] Downloading EB Application...
+2023/03/13 22:42:54.502473 [INFO] Region: eu-north-1
+2023/03/13 22:42:54.502475 [INFO] envID: e-2xf2ng3rqm
+2023/03/13 22:42:54.502477 [INFO] envBucket: elasticbeanstalk-eu-north-1-205127544240
+2023/03/13 22:42:54.502479 [INFO] Using manifest file name from command request
+2023/03/13 22:42:54.502486 [INFO] Manifest name is : manifest_1678747336819
+2023/03/13 22:42:54.502489 [INFO] Download app version manifest
+2023/03/13 22:42:54.502577 [INFO] Downloading: bucket: elasticbeanstalk-eu-north-1-205127544240, object: /resources/environments/e-2xf2ng3rqm/_runtime/versions/manifest_1678747336819
+2023/03/13 22:42:54.536412 [INFO] Download successful160bytes downloaded
+2023/03/13 22:42:54.536536 [INFO] Trying to read and parse version manifest...
+2023/03/13 22:42:54.536590 [INFO] Downloading: bucket: elasticbeanstalk-eu-north-1-205127544240, object: /resources/environments/e-2xf2ng3rqm/_runtime/_versions/ineuron_scrap_project_2/code-pipeline-1678747330119-961e370c264b5ed66cac2fc52dbefff6f64a43c7
+2023/03/13 22:42:54.567853 [INFO] Download successful2656929bytes downloaded
+2023/03/13 22:42:54.568043 [INFO] Executing instruction: ElectLeader
+2023/03/13 22:42:54.568049 [INFO] Running leader election for instance i-06a2631b5a17bba36...
+2023/03/13 22:42:54.568051 [INFO] Calling the cfn-elect-cmd-leader to elect the command leader.
+2023/03/13 22:42:54.568063 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-elect-cmd-leader --stack arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c --command-name ElasticBeanstalkCommand-AWSEBAutoScalingGroup --invocation-id 7d708cf1-b3de-4d2c-8bc8-7a7969d32f6d --listener-id i-06a2631b5a17bba36 --region eu-north-1
+2023/03/13 22:42:54.941426 [INFO] Instance is Leader.
+2023/03/13 22:42:54.941472 [INFO] Executing instruction: stopSqsd
+2023/03/13 22:42:54.941479 [INFO] This is a web server environment instance, skip stop sqsd daemon ...
+2023/03/13 22:42:54.941483 [INFO] Executing instruction: PreBuildEbExtension
+2023/03/13 22:42:54.941487 [INFO] Starting executing the config set Infra-EmbeddedPreBuild.
+2023/03/13 22:42:54.941502 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-init -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBAutoScalingGroup --region eu-north-1 --configsets Infra-EmbeddedPreBuild
+2023/03/13 22:42:55.265029 [INFO] Finished executing the config set Infra-EmbeddedPreBuild.
+
+2023/03/13 22:42:55.265051 [INFO] Executing instruction: StageApplication
+2023/03/13 22:42:55.271527 [INFO] extracting /opt/elasticbeanstalk/deployment/app_source_bundle to /var/app/staging/
+2023/03/13 22:42:55.271546 [INFO] Running command /bin/sh -c /usr/bin/unzip -q -o /opt/elasticbeanstalk/deployment/app_source_bundle -d /var/app/staging/
+2023/03/13 22:42:55.301625 [INFO] finished extracting /opt/elasticbeanstalk/deployment/app_source_bundle to /var/app/staging/ successfully
+2023/03/13 22:42:55.302529 [INFO] Executing instruction: RunAppDeployPreBuildHooks
+2023/03/13 22:42:55.302547 [INFO] Executing platform hooks in .platform/hooks/prebuild/
+2023/03/13 22:42:55.302562 [INFO] The dir .platform/hooks/prebuild/ does not exist
+2023/03/13 22:42:55.302565 [INFO] Finished running scripts in /var/app/staging/.platform/hooks/prebuild
+2023/03/13 22:42:55.302569 [INFO] Executing instruction: InstallDependency
+2023/03/13 22:42:55.302573 [INFO] checking dependencies file
+2023/03/13 22:42:55.302582 [INFO] Installing dependencies with requirements.txt by using Pip
+2023/03/13 22:42:55.302591 [INFO] Running command /bin/sh -c /var/app/venv/staging-LQM1lest/bin/pip install -r requirements.txt
+2023/03/13 22:43:06.969726 [INFO] Collecting aiobotocore==2.4.2
+  Downloading aiobotocore-2.4.2-py3-none-any.whl (66 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.8/66.8 KB 8.4 MB/s eta 0:00:00
+Collecting aiohttp==3.8.4
+  Downloading aiohttp-3.8.4-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (948 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 948.1/948.1 KB 47.7 MB/s eta 0:00:00
+Collecting aioitertools==0.11.0
+  Downloading aioitertools-0.11.0-py3-none-any.whl (23 kB)
+Collecting aiosignal==1.3.1
+  Downloading aiosignal-1.3.1-py3-none-any.whl (7.6 kB)
+Collecting async-generator==1.10
+  Downloading async_generator-1.10-py3-none-any.whl (18 kB)
+Collecting async-timeout==4.0.2
+  Downloading async_timeout-4.0.2-py3-none-any.whl (5.8 kB)
+Collecting asynctest==0.13.0
+  Downloading asynctest-0.13.0-py3-none-any.whl (26 kB)
+Collecting attrs==22.2.0
+  Downloading attrs-22.2.0-py3-none-any.whl (60 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.0/60.0 KB 16.6 MB/s eta 0:00:00
+Collecting beautifulsoup4==4.11.2
+  Downloading beautifulsoup4-4.11.2-py3-none-any.whl (129 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.4/129.4 KB 36.4 MB/s eta 0:00:00
+Collecting boto3==1.26.89
+  Downloading boto3-1.26.89-py3-none-any.whl (134 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.7/134.7 KB 35.3 MB/s eta 0:00:00
+Collecting botocore==1.27.59
+  Downloading botocore-1.27.59-py3-none-any.whl (9.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.1/9.1 MB 108.2 MB/s eta 0:00:00
+Collecting bs4==0.0.1
+  Downloading bs4-0.0.1.tar.gz (1.1 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting certifi==2022.12.7
+  Using cached certifi-2022.12.7-py3-none-any.whl (155 kB)
+Collecting cffi==1.15.1
+  Downloading cffi-1.15.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (427 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 427.9/427.9 KB 48.4 MB/s eta 0:00:00
+Collecting charset-normalizer==3.1.0
+  Downloading charset_normalizer-3.1.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (171 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 171.0/171.0 KB 42.1 MB/s eta 0:00:00
+Collecting click==8.1.3
+  Downloading click-8.1.3-py3-none-any.whl (96 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.6/96.6 KB 14.3 MB/s eta 0:00:00
+Collecting colorama==0.4.6
+  Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Collecting DateTime==5.0
+  Downloading DateTime-5.0-py3-none-any.whl (52 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 52.1/52.1 KB 15.5 MB/s eta 0:00:00
+Collecting dnspython==2.3.0
+  Downloading dnspython-2.3.0-py3-none-any.whl (283 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 283.7/283.7 KB 33.1 MB/s eta 0:00:00
+Collecting exceptiongroup==1.1.0
+  Downloading exceptiongroup-1.1.0-py3-none-any.whl (14 kB)
+Collecting Flask==2.2.3
+  Downloading Flask-2.2.3-py3-none-any.whl (101 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.8/101.8 KB 26.2 MB/s eta 0:00:00
+Collecting Flask-Cors==3.0.10
+  Downloading Flask_Cors-3.0.10-py2.py3-none-any.whl (14 kB)
+Collecting fpdf==1.7.2
+  Downloading fpdf-1.7.2.tar.gz (39 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting frozenlist==1.3.3
+  Downloading frozenlist-1.3.3-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (148 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 148.0/148.0 KB 22.5 MB/s eta 0:00:00
+Collecting fsspec==2023.1.0
+  Downloading fsspec-2023.1.0-py3-none-any.whl (143 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 143.0/143.0 KB 31.9 MB/s eta 0:00:00
+Collecting h11==0.14.0
+  Downloading h11-0.14.0-py3-none-any.whl (58 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.3/58.3 KB 16.9 MB/s eta 0:00:00
+Collecting idna==3.4
+  Downloading idna-3.4-py3-none-any.whl (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.5/61.5 KB 17.3 MB/s eta 0:00:00
+Collecting importlib-metadata==6.0.0
+  Using cached importlib_metadata-6.0.0-py3-none-any.whl (21 kB)
+Collecting itsdangerous==2.1.2
+  Downloading itsdangerous-2.1.2-py3-none-any.whl (15 kB)
+Collecting Jinja2==3.1.2
+  Downloading Jinja2-3.1.2-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.1/133.1 KB 18.1 MB/s eta 0:00:00
+Collecting jmespath==1.0.1
+  Downloading jmespath-1.0.1-py3-none-any.whl (20 kB)
+Collecting MarkupSafe==2.1.2
+  Downloading MarkupSafe-2.1.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Collecting multidict==6.0.4
+  Downloading multidict-6.0.4-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (94 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 94.8/94.8 KB 21.3 MB/s eta 0:00:00
+Collecting mysql-connector-python==8.0.32
+  Downloading mysql_connector_python-8.0.32-cp37-cp37m-manylinux1_x86_64.whl (23.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 23.5/23.5 MB 54.6 MB/s eta 0:00:00
+Collecting numpy==1.21.6
+  Downloading numpy-1.21.6-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (15.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.7/15.7 MB 91.0 MB/s eta 0:00:00
+Collecting outcome==1.2.0
+  Downloading outcome-1.2.0-py2.py3-none-any.whl (9.7 kB)
+Collecting packaging==23.0
+  Downloading packaging-23.0-py3-none-any.whl (42 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.7/42.7 KB 12.4 MB/s eta 0:00:00
+Collecting pandas==1.3.5
+  Downloading pandas-1.3.5-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.3/11.3 MB 114.0 MB/s eta 0:00:00
+Collecting protobuf==3.20.3
+  Downloading protobuf-3.20.3-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.whl (1.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 67.5 MB/s eta 0:00:00
+Collecting pycparser==2.21
+  Downloading pycparser-2.21-py2.py3-none-any.whl (118 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 118.7/118.7 KB 29.7 MB/s eta 0:00:00
+Collecting pymongo==4.3.3
+  Downloading pymongo-4.3.3-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (484 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 484.5/484.5 KB 72.7 MB/s eta 0:00:00
+Collecting PySocks==1.7.1
+  Downloading PySocks-1.7.1-py3-none-any.whl (16 kB)
+Collecting python-dateutil==2.8.2
+  Downloading python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 247.7/247.7 KB 53.7 MB/s eta 0:00:00
+Collecting python-dotenv==0.21.1
+  Downloading python_dotenv-0.21.1-py3-none-any.whl (19 kB)
+Collecting pytz==2022.7.1
+  Downloading pytz-2022.7.1-py2.py3-none-any.whl (499 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 499.4/499.4 KB 60.9 MB/s eta 0:00:00
+Collecting requests==2.28.2
+  Downloading requests-2.28.2-py3-none-any.whl (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.8/62.8 KB 16.9 MB/s eta 0:00:00
+Collecting s3fs==2023.1.0
+  Downloading s3fs-2023.1.0-py3-none-any.whl (27 kB)
+Collecting s3transfer==0.6.0
+  Downloading s3transfer-0.6.0-py3-none-any.whl (79 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.6/79.6 KB 23.8 MB/s eta 0:00:00
+Collecting selenium==4.8.2
+  Downloading selenium-4.8.2-py3-none-any.whl (6.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 102.2 MB/s eta 0:00:00
+Collecting six==1.16.0
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting sniffio==1.3.0
+  Downloading sniffio-1.3.0-py3-none-any.whl (10 kB)
+Collecting sortedcontainers==2.4.0
+  Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+Collecting soupsieve==2.4
+  Downloading soupsieve-2.4-py3-none-any.whl (37 kB)
+Collecting tqdm==4.65.0
+  Downloading tqdm-4.65.0-py3-none-any.whl (77 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 77.1/77.1 KB 23.1 MB/s eta 0:00:00
+Collecting trio==0.22.0
+  Downloading trio-0.22.0-py3-none-any.whl (384 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 384.9/384.9 KB 55.0 MB/s eta 0:00:00
+Collecting trio-websocket==0.9.2
+  Downloading trio_websocket-0.9.2-py3-none-any.whl (16 kB)
+Collecting typing_extensions==4.5.0
+  Using cached typing_extensions-4.5.0-py3-none-any.whl (27 kB)
+Collecting urllib3==1.26.15
+  Downloading urllib3-1.26.15-py2.py3-none-any.whl (140 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 140.9/140.9 KB 23.0 MB/s eta 0:00:00
+Collecting webdriver-manager==3.8.5
+  Downloading webdriver_manager-3.8.5-py2.py3-none-any.whl (27 kB)
+Collecting Werkzeug==2.2.3
+  Downloading Werkzeug-2.2.3-py3-none-any.whl (233 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 233.6/233.6 KB 44.4 MB/s eta 0:00:00
+Collecting wincertstore==0.2
+  Downloading wincertstore-0.2-py2.py3-none-any.whl (8.8 kB)
+Collecting wrapt==1.15.0
+  Downloading wrapt-1.15.0-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (75 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 75.7/75.7 KB 23.7 MB/s eta 0:00:00
+Collecting wsproto==1.2.0
+  Downloading wsproto-1.2.0-py3-none-any.whl (24 kB)
+Collecting yarl==1.8.2
+  Downloading yarl-1.8.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (231 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 231.4/231.4 KB 43.2 MB/s eta 0:00:00
+Collecting zipp==3.15.0
+  Using cached zipp-3.15.0-py3-none-any.whl (6.8 kB)
+Collecting zope.interface==5.5.2
+  Downloading zope.interface-5.5.2-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (254 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 254.2/254.2 KB 47.7 MB/s eta 0:00:00
+INFO: pip is looking at multiple versions of beautifulsoup4 to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of attrs to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of asynctest to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of async-timeout to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of async-generator to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of aiosignal to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of aioitertools to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of aiohttp to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of <Python from Requires-Python> to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of aiobotocore to determine which version is compatible with other requirements. This could take a while.
+
+The conflict is caused by:
+    The user requested botocore==1.27.59
+    aiobotocore 2.4.2 depends on botocore<1.27.60 and >=1.27.59
+    boto3 1.26.89 depends on botocore<1.30.0 and >=1.29.89
+
+To fix this you could try to:
+1. loosen the range of package versions you've specified
+2. remove package versions to allow pip attempt to solve the dependency conflict
+
+
+2023/03/13 22:43:06.969754 [INFO] ERROR: Cannot install -r requirements.txt (line 1), -r requirements.txt (line 10) and botocore==1.27.59 because these package versions have conflicting dependencies.
+ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts
+WARNING: You are using pip version 22.0.4; however, version 23.0.1 is available.
+You should consider upgrading via the '/var/app/venv/staging-LQM1lest/bin/python3.7 -m pip install --upgrade pip' command.
+
+2023/03/13 22:43:06.969766 [ERROR] An error occurred during execution of command [app-deploy] - [InstallDependency]. Stop running the command. Error: fail to install dependencies with requirements.txt file with error Command /bin/sh -c /var/app/venv/staging-LQM1lest/bin/pip install -r requirements.txt failed with error exit status 1. Stderr:ERROR: Cannot install -r requirements.txt (line 1), -r requirements.txt (line 10) and botocore==1.27.59 because these package versions have conflicting dependencies.
+ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts
+WARNING: You are using pip version 22.0.4; however, version 23.0.1 is available.
+You should consider upgrading via the '/var/app/venv/staging-LQM1lest/bin/python3.7 -m pip install --upgrade pip' command.
+ 
+
+2023/03/13 22:43:06.969769 [INFO] Executing cleanup logic
+2023/03/13 22:43:06.969845 [INFO] CommandService Response: {"status":"FAILURE","api_version":"1.0","results":[{"status":"FAILURE","msg":"Engine execution has encountered an error.","returncode":1,"events":[{"msg":"Instance deployment failed to install application dependencies. The deployment failed.","timestamp":1678747386969,"severity":"ERROR"},{"msg":"Instance deployment failed. For details, see 'eb-engine.log'.","timestamp":1678747386969,"severity":"ERROR"}]}]}
+
+2023/03/13 22:43:06.970034 [INFO] Platform Engine finished execution on command: app-deploy
+
+2023/03/13 22:45:45.189273 [INFO] Starting...
+2023/03/13 22:45:45.189321 [INFO] Starting EBPlatform-PlatformEngine
+2023/03/13 22:45:45.189338 [INFO] reading event message file
+2023/03/13 22:45:45.189482 [INFO] Engine received EB command cfn-hup-exec
+
+2023/03/13 22:45:45.254252 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBAutoScalingGroup --region eu-north-1
+2023/03/13 22:45:45.672872 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:eu-north-1:205127544240:stack/awseb-e-2xf2ng3rqm-stack/c1b061e0-c1ef-11ed-b547-067d2357517c -r AWSEBBeanstalkMetadata --region eu-north-1
+2023/03/13 22:45:46.189888 [INFO] checking whether command bundle-log is applicable to this instance...
+2023/03/13 22:45:46.189898 [INFO] this command is applicable to the instance, thus instance should execute command
+2023/03/13 22:45:46.189901 [INFO] Engine command: (bundle-log)
+
+2023/03/13 22:45:46.189948 [INFO] Executing instruction: GetBundleLogs
+2023/03/13 22:45:46.190033 [INFO] Bundle Logs...
