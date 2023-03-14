@@ -116,7 +116,7 @@ class autoScrapper:
         
         scrapper = scrappingOperations(chrome_options=self.chrome_options) # initialization of scrapping
         source_link="https://ineuron.ai/courses"
-        all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=120)
+        all_course_link_list=scrapper.getAllCourseLink(source_link,load_time=10)
 
         counter=0
         #for course_link in all_course_link_list:
