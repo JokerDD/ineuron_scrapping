@@ -62,6 +62,7 @@ class scrappingOperations:
             return distinct_course_links_list
         except Exception as e:
             self.logger.custlogger().error(f"error at getting course link with :: {e} ")
+            print(f"error in chromedriver :: {e}")
         
     def get_course_code(self,course_links):
     
