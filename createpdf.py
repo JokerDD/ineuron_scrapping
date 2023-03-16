@@ -3,8 +3,9 @@ from fpdf import FPDF
 import math
 import datetime
 from mongoDb.mongodb import mongodbOperations
+import boto3
 from custom_logging.customLogger import custLogger
-
+import os
 
 now = datetime.datetime.now()
 
@@ -241,6 +242,22 @@ class createPdfoperations:
                         pdf.output(f'pdfs_single/all_courses_{formatted_date_time}.pdf', 'F')
                     except Exception as e:
                         self.logger.custlogger().error(f"error at creating single pdf file with :: {e}")
+
+                BUCKET_NAME = 'saifineuronproject'
+                FOLDER_NAME = 'pdrf_file_single'
+                FILE_PATH = f'pdfs_single/all_courses_{formatted_date_time}.pdf'
+
+
+                # Create an S3 client
+                s3 = boto3.client(service_name='s3',
+                    region_name='eu-north-1',
+                    aws_access_key_id=os.environ.get("aws_access_key_id"),
+                    aws_secret_access_key=os.environ.get("aws_secret_key_id"))
+
+                # Upload the file to the S3 bucket/folder
+                with open(FILE_PATH, 'rb') as f:
+                    s3.upload_fileobj(f, BUCKET_NAME, FOLDER_NAME + f'all_courses_{formatted_date_time}.pdf')
+
             else:
                 self.logger.custlogger().info(f"dataframe is empty possibly becuase there is no data in mongo DB, check mongo class")
         else:
