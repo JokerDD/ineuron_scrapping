@@ -36,7 +36,7 @@ class scrappingOperations:
 
         try:
             self.logger.custlogger().info("INSIDE THE COURSE GET FUNCTION")
-            driver = webdriver.Chrome(options=self.chrome_options)
+            driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=self.chrome_options)
             driver.get(source_link)
 
             # scroll down to the bottom of the page
