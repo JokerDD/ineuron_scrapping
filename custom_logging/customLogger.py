@@ -14,7 +14,7 @@ class S3Handler(logging.Handler):
         self.s3 = boto3.client(service_name='s3',
                     region_name='eu-north-1',
                     aws_access_key_id=os.environ.get("aws_access_key_id"),
-                    aws_secret_access_key=os.environ.get("aws_access_key_id"))
+                    aws_secret_access_key=os.environ.get("aws_secret_key_id"))
 
     def emit(self, record):
         existing_data = ''
