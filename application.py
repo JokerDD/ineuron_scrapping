@@ -72,9 +72,11 @@ def pdf_download():
                     aws_access_key_id=os.environ.get("aws_access_key_id"),
                     aws_secret_access_key=os.environ.get("aws_secret_key_id"))
             
-            return s3.generate_presigned_url('get_object',
+            pdf_url= s3.generate_presigned_url('get_object',
                                                 Params={'Bucket': BUCKET_NAME, 'Key': FOLDER_NAME+pdf_file_name},
                                                 ExpiresIn=60)
+        
+            return redirect(pdf_url)
     except Exception as e:
         logging.custlogger().error(f"error at downloadinf pdf with :: {e}")
         print(f"error at downloadinf pdf with :: {e}")
