@@ -198,13 +198,13 @@ class mongodbOperations:
         except Exception as e:
             self.logger.custlogger().error(f"error at deleting collection in mongo db :: {e} ")
 
-    def getCollectionName_latest(self,dbName,collectionName="coll_data"):
+    def getCollectionName_latest(self,dbName,collectionName="coll_data",key_name="collection_name_iNeauron"):
 
         try:
             if self.isCollectionPresent(dbName, collectionName):
                 collection=self.getCollection(dbName,collectionName)
                 data= collection.find_one(sort=[('$natural', pymongo.DESCENDING)])
-                last_primary_coll_name=data['collection_name_iNeauron']
+                last_primary_coll_name=data[key_name]
                 return last_primary_coll_name
         except Exception as e:
             

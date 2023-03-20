@@ -48,7 +48,8 @@ class createPdfoperations:
         except Exception as e:
             self.logger.custlogger().error(f"error at creating dataframe with :: {e}")
             return False
-    
+        
+      
     def elementCheckDeclare(self,column_name,loop_number,df_name,log_instance):
 
         '''
@@ -85,7 +86,7 @@ class createPdfoperations:
 
         
         
-    def createPdf(self):
+    def createPdf(self,filename):
         '''
         desc : This method shall be used to create pdf file from the df data
         return : NaN
@@ -233,19 +234,19 @@ class createPdfoperations:
                     
                     if self.singlefile == False:
                         try:
-                            pdf.output(f'pdfs_many/{course_name}_{formatted_date_time}.pdf', 'F')
+                            pdf.output(f'pdfs_many/{course_name}_{filename}.pdf', 'F')
                         except Exception as e:
                             logger_instance.error(f"error at creating many pdf file with :: {e}")
 
                 if self.singlefile == True:
                     try:
-                        pdf.output(f'pdfs_single/all_courses_{formatted_date_time}.pdf', 'F')
+                        pdf.output(f'pdfs_single/all_courses_{filename}.pdf', 'F')
                     except Exception as e:
                         self.logger.custlogger().error(f"error at creating single pdf file with :: {e}")
 
                 BUCKET_NAME = 'saifineuronproject'
-                FOLDER_NAME = 'pdrf_file_single'
-                FILE_PATH = f'pdfs_single/all_courses_{formatted_date_time}.pdf'
+                FOLDER_NAME = 'pdf_file_single/'
+                FILE_PATH = f'pdfs_single/all_courses_{filename}.pdf'
 
 
                 # Create an S3 client
@@ -256,7 +257,9 @@ class createPdfoperations:
 
                 # Upload the file to the S3 bucket/folder
                 with open(FILE_PATH, 'rb') as f:
-                    s3.upload_fileobj(f, BUCKET_NAME, FOLDER_NAME + f'all_courses_{formatted_date_time}.pdf')
+                    s3.upload_fileobj(f, BUCKET_NAME, FOLDER_NAME + f'all_courses_{filename}.pdf')
+
+                
 
             else:
                 self.logger.custlogger().info(f"dataframe is empty possibly becuase there is no data in mongo DB, check mongo class")

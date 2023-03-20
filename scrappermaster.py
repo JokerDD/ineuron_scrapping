@@ -48,13 +48,13 @@ class autoScrapper:
         """
         try:
             collection_name="coll_data"
+            coll_name_data={'collection_name_iNeauron' : collname,
+                            'pdf_file_name' : f"all_courses_{collname}.pdf"}
             if self.dbOps.isCollectionPresent(dbName=self.dbName, collectionName=collection_name):
-                coll_name_data={'collection_name_iNeauron' : collname}
                 self.dbOps.insertOneData(dbName=self.dbName,collectionName=collection_name,data=coll_name_data)
                 self.dbOps.updatePrimaryColl(dbName=self.dbName,primary_coll_name=self.collectionName,status_data="in_progress")
             else:
                 self.dbOps.createCollection(dbName=self.dbName, collectionName=collection_name)
-                coll_name_data={'collection_name_iNeauron' : collname}
                 self.dbOps.insertOneData(dbName=self.dbName,collectionName=collection_name,data=coll_name_data)
                 self.dbOps.updatePrimaryColl(dbName=self.dbName,primary_coll_name=self.collectionName,status_data="in_progress")
         except Exception as e:
@@ -166,7 +166,7 @@ class autoScrapper:
 
                 
             try:
-                self.pdfobj.createPdf()
+                self.pdfobj.createPdf(f"all_courses_{self.collectionName}.pdf")
             except Exception as e:
                 self.logger.custlogger().info(f"error at create pdf with :: {e}")
             print("all completed")
