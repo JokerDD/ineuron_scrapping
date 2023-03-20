@@ -3,6 +3,8 @@ from flask_cors import CORS, cross_origin
 from mongoDb.mongodb import mongodbOperations
 from custom_logging.customLogger import custLogger
 import scrappermaster as sm
+import boto3
+import os
 
 
 dbOps = mongodbOperations(username='saif_1', password='saif_1')
@@ -53,6 +55,32 @@ def app_start():
             return "soemthing went wrong here, check with developer"
     else:
         return "not a POST method"
+    
+@app.route("/pdfdownload",methods = ['GET'])
+
+def pdf_download():
+    try:
+        if dbOps.getDocCount(dbName="i_nearon_scrapping",collectionName="coll_data") > 0:
+            pdf_file_name=dbOps.getCollectionName_latest(dbName="i_nearon_scrapping",key_name="pdf_file_name")
+
+            BUCKET_NAME = 'saifineuronproject'
+            FOLDER_NAME = 'pdf_file_single/'
+            
+
+            s3 = boto3.client(service_name='s3',
+                    region_name='eu-north-1',
+                    aws_access_key_id=os.environ.get("aws_access_key_id"),
+                    aws_secret_access_key=os.environ.get("aws_secret_key_id"))
+            
+            return s3.generate_presigned_url('get_object',
+                                                Params={'Bucket': BUCKET_NAME, 'Key': FOLDER_NAME+pdf_file_name},
+                                                ExpiresIn=60)
+    except Exception as e:
+        logging.custlogger().error(f"error at downloadinf pdf with :: {e}")
+        print(f"error at downloadinf pdf with :: {e}")
+
+
+
 
 if __name__=="__main__":
     app.run(host="0.0.0.0",port=8080)
