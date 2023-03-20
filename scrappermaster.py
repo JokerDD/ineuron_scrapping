@@ -166,7 +166,7 @@ class autoScrapper:
 
                 
             try:
-                self.pdfobj.createPdf(f"all_courses_{self.collectionName}.pdf")
+                self.pdfobj.createPdf(self.collectionName)
             except Exception as e:
                 self.logger.custlogger().info(f"error at create pdf with :: {e}")
             print("all completed")
